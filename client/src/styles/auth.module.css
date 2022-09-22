@@ -1,0 +1,77 @@
+.inner_container {
+    width: 1040px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 80px;
+    min-height: 100vh;
+}
+
+.auth_block {
+    margin: 0 auto;
+    width: 1040px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.input {
+    width: 300px;
+    font-size: 14px;
+    padding: 8px;
+    border: 1px solid #AAAAAA;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.inputs {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.button_auth {
+    background-color: #FB9B5A;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    width: 300px;
+    padding: 8px 0;
+}
+
+.button_auth:hover {
+    background-color: #F4873D;
+
+}
+
+.sign_up_block {
+    margin-top: 20px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+
+.not_member {
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sign_up {
+    color: #FB9B5A;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.sign_up:hover {
+    color: #F4873D;
+    font-weight: 500;
+    cursor: pointer;
+
+}
