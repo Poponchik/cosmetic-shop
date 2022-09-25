@@ -8,7 +8,10 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-
+  @ApiProperty({ example: 'username', description: 'имя пользователя' })
+  @Prop({ required: true })
+  name: string
+  
   @ApiProperty({ example: 'user@gmail.com', description: 'почтовый адрес' })
   @Prop({ unique: true, required: true })
   email: string
