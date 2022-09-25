@@ -8,8 +8,6 @@ export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @ApiProperty({ example: '1', description: 'id пользователя' })
-  _id: mongoose.Types.ObjectId
 
   @ApiProperty({ example: 'user@gmail.com', description: 'почтовый адрес' })
   @Prop({ unique: true, required: true })
@@ -19,13 +17,6 @@ export class User {
   @Prop({ required: true })
   password: string
 
-  // @ApiProperty({example: 'true', description: 'Забанен или нет'})
-  @Prop({ default: false })
-  banned: boolean
-
-  // @ApiProperty({example: 'Бот', description: 'Причина бана'})
-  @Prop()
-  banReason: string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)

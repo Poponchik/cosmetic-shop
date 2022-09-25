@@ -6,9 +6,6 @@ import * as mongoose from 'mongoose'
 
 
 export class CreateUserDto {
-
-    @ApiProperty({example: '1', description: 'id пользователя'})
-    readonly _id: mongoose.Types.ObjectId
     @ApiProperty({example: 'user@gmail.com', description: 'почтовый адрес'})
     readonly email: string
     @ApiProperty({example: '12345', description: 'Пароль'})
