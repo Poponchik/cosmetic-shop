@@ -11,6 +11,10 @@ export class User {
   @ApiProperty({ example: '1', description: 'id пользователя' })
   _id: mongoose.Types.ObjectId
 
+  @ApiProperty({ example: 'username', description: 'имя пользователя' })
+  @Prop({ required: true })
+  name: string
+
   @ApiProperty({ example: 'user@gmail.com', description: 'почтовый адрес' })
   @Prop({ unique: true, required: true })
   email: string
