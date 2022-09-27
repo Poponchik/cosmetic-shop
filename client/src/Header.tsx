@@ -1,11 +1,17 @@
 import * as React from "react";
 import styles from "./styles/header.module.css";
 import { FaUser } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 function Header() {
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/auth/login";
+  }
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -57,9 +63,15 @@ function Header() {
             </div>
 
             <div className={styles.icons}>
-              <Link to="/auth/login" className={styles.link}>
-                <FaUser size={22} />
-              </Link>
+              {localStorage.getItem("token") ? (
+                <Link to="/auth/login" className={styles.link}>
+                  <FiLogOut size={22} onClick={logout} />
+                </Link>
+              ) : (
+                <Link to="/auth/login" className={styles.link}>
+                  <FaUser size={22}  />
+                </Link>
+              )}
 
               <Link to="/cart" className={styles.link}>
                 <FaShoppingCart size={22} />
