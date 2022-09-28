@@ -21,8 +21,8 @@ export class CreateProductDto {
     @ApiProperty({ example: 'тег', description: '...' })
     readonly tagsProduct: string[]
 
-    // @ApiProperty({ example: 'фото товара' })
-    // readonly photoProduct: string
+    @ApiProperty({ example: 'фото товара' })
+    readonly image: string
 }
 
 

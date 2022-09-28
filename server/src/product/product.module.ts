@@ -3,8 +3,7 @@ import { ProductService } from './product.service'
 import { ProductController } from './product.controller'
 import { Product, ProductSchema } from '../product/product.schema'
 import { MongooseModule } from '@nestjs/mongoose'
-
-
+import { FilesModule } from '../files/files.module'
 import { UsersModule } from '../users/users.module'
 
 
@@ -21,7 +20,8 @@ import { UsersModule } from '../users/users.module'
     MongooseModule.forFeature([
       { name: Product.name, schema: ProductSchema }
     ]),
-    forwardRef(() => UsersModule)
+    forwardRef(() => UsersModule),
+    FilesModule
   ],
 })
 export class ProductModule {}

@@ -1,8 +1,10 @@
-import { Body, Controller, Post, Get, Delete, Put, Param } from '@nestjs/common'
+import { Body, Controller, Post, Get, Delete, Param, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger"
 import { Product } from "./product.schema"
 import { CreateProductDto } from "./dto/create-product.dto"
+import { FileInterceptor } from "@nestjs/platform-express"
+
 
 
 
@@ -15,9 +17,12 @@ export class ProductController {
 
     @ApiOperation({ summary: 'Добавить продукт' })
     @ApiResponse({ status: 200, type: Product })
+    @UseInterceptors(FileInterceptor('image'))
     @Post('/createProduct/')
-    createProducts(@Body() ProductDto: CreateProductDto) {
-        return this.productService.createProducts(ProductDto)
+    createProducts(
+        @Body() ProductDto: CreateProductDto,
+        @UploadedFile() image) {
+        return this.productService.createProducts(ProductDto, image)
     }
 
 

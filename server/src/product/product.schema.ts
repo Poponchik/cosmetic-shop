@@ -28,11 +28,9 @@ export class Product {
   @Prop([String])
   tagsProduct: string[]
 
-
-
-  // @ApiProperty({ example: 'фото товара' })
-  // @Prop({ required: true })
-  // photoProduct: string
+  @ApiProperty({ example: 'фотографии товара' })
+  @Prop()
+  image: string
 
 }
 
