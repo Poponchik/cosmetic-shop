@@ -31,15 +31,14 @@ export class ProductService {
         return products
     }
     async getOneProductsId(id: string) {
-        console.log('idd::', id)
-        const products = await this.productModel.findOne({ id })
-        return products
-    }
-    async getProductsСategory(categoryProduct: Object) {
-        const products = await this.productModel.find(categoryProduct)
+        const products = await this.productModel.findById(id)
         return products
     }
 
+    async getProductsСategory(categoryId: string) {
+        const products = await this.productModel.find({ category: categoryId })
+        return products
+    }
 
     async deleteProduct(_id: string) {
         await this.productModel.deleteOne({ _id })

@@ -14,23 +14,24 @@ export class Product {
 
   @ApiProperty({ example: 'название товара', description: 'крем' })
   @Prop({ required: true })
-  nameProduct: string
+  name: string
 
   @ApiProperty({ example: 'описание товара', description: 'от морщин' })
   @Prop({ required: true })
-  descriptionProduct: string
+  description: string
 
   @ApiProperty({ example: 'категория товара', description: 'крема' })
   @Prop({ required: true })
-  categoryProduct: string
+  category: string
 
   @ApiProperty({ example: 'тег', description: '...' })
   @Prop([String])
-  tagsProduct: string[]
+  tags: string[]
 
   @ApiProperty({ example: 'фотографии товара' })
-  @Prop()
-  image: string
+  // @Prop([String])
+  @Prop([String])
+  image: string[]
 
 }
 

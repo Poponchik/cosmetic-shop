@@ -22,6 +22,8 @@ export class ProductController {
     createProducts(
         @Body() ProductDto: CreateProductDto,
         @UploadedFile() image) {
+        // @uploadMultipleFiles() image) {
+        console.log('image')
         return this.productService.createProducts(ProductDto, image)
     }
 
@@ -35,18 +37,16 @@ export class ProductController {
 
     @ApiOperation({ summary: 'Получить продукт по id товара' })
     @ApiResponse({ status: 200, type: Product })
-    @Get('/getOneProductsId/:id')
+    @Get('/product/:id')
     getOneProductsId(@Param('id') id: string) {
         return this.productService.getOneProductsId(id)
     }
-
     @ApiOperation({ summary: 'Получить продукт по категории' })
     @ApiResponse({ status: 200, type: [Product] })
-    @Post('/productsCategory/')
-    getProductsСategory(@Body() categoryProduct: Object) {
-        return this.productService.getProductsСategory(categoryProduct)
+    @Get('/productsCategoryy/:categoryId')
+    getProductsСategory(@Param('categoryId') categoryId: string) {
+        return this.productService.getProductsСategory(categoryId)
     }
-
     @ApiOperation({ summary: 'Удалить товар по id' })
     @ApiResponse({ status: 200, type: Product })
     @Delete('/deleteProduct/:id')
