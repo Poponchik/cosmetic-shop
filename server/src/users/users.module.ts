@@ -11,12 +11,25 @@ import { AuthModule } from '../auth/auth.module'
   controllers: [UsersController],
   providers: [UsersService],
   imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    forwardRef(() => AuthModule)
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+    ]),
+    forwardRef(() => AuthModule),
   ],
   exports:
     [
       UsersService
     ]
-})
-export class UsersModule { }
+  })
+  export class UsersModule { }
+
+
+
+
+
+
+
+
+
+
+  // MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),
