@@ -10,19 +10,19 @@ export class CreateProductDto {
     readonly userId: mongoose.Schema.Types.ObjectId
 
     @ApiProperty({ example: 'название товара', description: 'крем' })
-    readonly nameProduct: string
+    readonly name: string
 
     @ApiProperty({ example: 'описание товара', description: 'от морщин' })
-    readonly descriptionProduct: string
+    readonly description: string
 
     @ApiProperty({ example: 'категория товара', description: 'крема' })
-    readonly categoryProduct: string
+    readonly category: string
 
     @ApiProperty({ example: 'тег', description: '...' })
-    readonly tagsProduct: string[]
+    readonly tags: string[]
 
-    // @ApiProperty({ example: 'фото товара' })
-    // readonly photoProduct: string
+    @ApiProperty({ example: 'фото товара' })
+    readonly image: string[]
 }
 
 

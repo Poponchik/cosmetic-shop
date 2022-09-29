@@ -3,6 +3,7 @@ import { Product, ProductDocument } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
+import { FilesService } from '../files/files.service';
 
 
 
@@ -14,33 +15,32 @@ import { Model } from 'mongoose'
 @Injectable()
 export class ProductService {
 
-    constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>) { }
+    constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
+        private fileService: FilesService) { }
 
-
-    async createProducts(dto: CreateProductDto) {
-        console.log('dto::', dto)
-        const products = await this.productModel.create(dto)
+    async createProducts(dto: CreateProductDto, image: any) {
+        const fileName = await this.fileService.createFile(image)
+        const products = await this.productModel.create({ ...dto, image: fileName })
         return products
     }
 
 
-    async getAllProducts() {
-        const products = await this.productModel.find()
+    async getAllProducts(userId: string) {
+        const products = await this.productModel.find({userId})
         return products
     }
     async getOneProductsId(id: string) {
-        console.log('idd::', id)
-        const products = await this.productModel.findOne({id})
-        return products
-    }
-    async getProductsСategory(categoryProduct: Object) {
-        const products = await this.productModel.find(categoryProduct)
+        const products = await this.productModel.findById(id)
         return products
     }
 
+    async getProductsСategory(categoryId: string) {
+        const products = await this.productModel.find({ category: categoryId })
+        return products
+    }
 
     async deleteProduct(_id: string) {
-        await this.productModel.deleteOne({_id})
+        await this.productModel.deleteOne({ _id })
         return 'Remove ' + _id
     }
 
