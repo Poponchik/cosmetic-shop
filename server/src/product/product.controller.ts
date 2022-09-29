@@ -1,9 +1,9 @@
-import { Body, Controller, Post, Get, Delete, Param, UploadedFile, UseInterceptors } from '@nestjs/common'
+import { Body, Controller, Post, Get, Delete, Param, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common'
 import { ProductService } from './product.service'
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger"
 import { Product } from "./product.schema"
 import { CreateProductDto } from "./dto/create-product.dto"
-import { FileInterceptor } from "@nestjs/platform-express"
+import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express"
 
 
 
@@ -15,24 +15,28 @@ export class ProductController {
     constructor(private productService: ProductService) { }
 
 
+
+
     @ApiOperation({ summary: 'Добавить продукт' })
     @ApiResponse({ status: 200, type: Product })
-    @UseInterceptors(FileInterceptor('image'))
     @Post('/createProduct/')
+    @UseInterceptors(FilesInterceptor('image'))
     createProducts(
         @Body() ProductDto: CreateProductDto,
-        @UploadedFile() image) {
+        @UploadedFiles() image) {
         // @uploadMultipleFiles() image) {
-        console.log('image')
+        // console.log('image::', image)
+
+
         return this.productService.createProducts(ProductDto, image)
     }
 
 
     @ApiOperation({ summary: 'Получить все продукты' })
     @ApiResponse({ status: 200, type: [Product] })
-    @Get()
-    getAllProducts() {
-        return this.productService.getAllProducts()
+    @Get('/productsAll/:userId')
+    getAllProducts(@Param('userId') userId: string) {
+        return this.productService.getAllProducts(userId)
     }
 
     @ApiOperation({ summary: 'Получить продукт по id товара' })
@@ -43,7 +47,7 @@ export class ProductController {
     }
     @ApiOperation({ summary: 'Получить продукт по категории' })
     @ApiResponse({ status: 200, type: [Product] })
-    @Get('/productsCategoryy/:categoryId')
+    @Get('/productsCategory/:categoryId')
     getProductsСategory(@Param('categoryId') categoryId: string) {
         return this.productService.getProductsСategory(categoryId)
     }

@@ -23,7 +23,6 @@ export class CreateProductDto {
 
     @ApiProperty({ example: 'фото товара' })
     readonly image: string[]
-    // readonly image: string
 }
 
 

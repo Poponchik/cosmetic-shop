@@ -18,7 +18,6 @@ export class ProductService {
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
         private fileService: FilesService) { }
 
-
     async createProducts(dto: CreateProductDto, image: any) {
         const fileName = await this.fileService.createFile(image)
         const products = await this.productModel.create({ ...dto, image: fileName })
@@ -26,8 +25,8 @@ export class ProductService {
     }
 
 
-    async getAllProducts() {
-        const products = await this.productModel.find()
+    async getAllProducts(userId: string) {
+        const products = await this.productModel.find({userId})
         return products
     }
     async getOneProductsId(id: string) {

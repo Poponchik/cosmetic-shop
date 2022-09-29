@@ -7,17 +7,21 @@ import * as uuid from 'uuid'
 @Injectable()
 export class FilesService {
 
-    async createFile(file): Promise<string> {
+    async createFile(files): Promise<any> {
         try {
-            const fileName = uuid.v4() + '.jpg'
-            const filePath = path.resolve(__dirname, '..', 'static')
-            if (!fs.existsSync(filePath)) {
-                fs.mkdirSync(filePath, {recursive: true})
+            const fileNames = []
+            files.forEach(file => {
+                const fileName = uuid.v4() + '.jpg'
+                const filePath = path.resolve(__dirname, '..', 'static')
+                if (!fs.existsSync(filePath)) {
+                    fs.mkdirSync(filePath, { recursive: true })
+                }
+                fs.writeFileSync(path.join(filePath, fileName), file.buffer)
+                fileNames.push(fileName)
             }
-            fs.writeFileSync(path.join(filePath, fileName), file.buffer)
-            console.log(fileName)
-            
-            return fileName
+            )
+            return fileNames
+
         } catch (e) {
             throw new HttpException('произошла ошибка при записи файла', HttpStatus.INTERNAL_SERVER_ERROR)
         }
