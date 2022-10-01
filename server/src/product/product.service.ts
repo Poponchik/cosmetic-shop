@@ -4,13 +4,8 @@ import { CreateProductDto } from './dto/create-product.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { FilesService } from '../files/files.service';
-
-
-
-
-
-
-
+import * as path from 'path'
+import * as fs from 'fs'
 
 @Injectable()
 export class ProductService {
@@ -18,19 +13,20 @@ export class ProductService {
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
         private fileService: FilesService) { }
 
-    async createProducts(dto: CreateProductDto, image: any) {
-        const fileName = await this.fileService.createFile(image)
-        const products = await this.productModel.create({ ...dto, image: fileName })
+    async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
+
+        const fileName = await this.fileService.createFile(images)
+        const products = await this.productModel.create({ ...dto, images: fileName, category: categoryId })
         return products
     }
 
 
-    async getAllProducts(userId: string) {
-        const products = await this.productModel.find({userId})
+    async getAllProducts() {
+        const products = await this.productModel.find()
         return products
     }
-    async getOneProductsId(id: string) {
-        const products = await this.productModel.findById(id)
+    async getOneProductsId(_id: string) {
+        const products = await this.productModel.findById({_id})
         return products
     }
 
@@ -40,18 +36,25 @@ export class ProductService {
     }
 
     async deleteProduct(_id: string) {
+        const { images } = await this.productModel.findById(_id)
+        images.forEach((image) => {
+            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
+        })
         await this.productModel.deleteOne({ _id })
         return 'Remove ' + _id
     }
 
 
-    async changeProduct(dto: CreateProductDto, _id: string) {
-        console.log('dto::', dto)
-        console.log('_id::', _id)
-        await this.productModel.findOneAndUpdate({ _id }, { "$set": dto }, { new: true })
-        return dto
+    async changeProduct(dto: CreateProductDto, _id: string, images: any) {
+        const response = await this.productModel.findById(_id)
+        response.images.forEach((image) => {
+            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
+        })
+        const fileName = await this.fileService.createFile(images)
+        const products = await this.productModel.findOneAndUpdate({ _id }, { "$set": dto, images: fileName }, { new: true })
+        return products
     }
 
 
-
 }
+

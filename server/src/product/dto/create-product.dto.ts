@@ -6,8 +6,8 @@ import * as mongoose from 'mongoose'
 
 export class CreateProductDto {
 
-    @ApiProperty({ example: 'id юзера' })
-    readonly userId: mongoose.Schema.Types.ObjectId
+    // @ApiProperty({ example: 'id юзера' })
+    // readonly userId: mongoose.Schema.Types.ObjectId
 
     @ApiProperty({ example: 'название товара', description: 'крем' })
     readonly name: string
@@ -16,7 +16,7 @@ export class CreateProductDto {
     readonly description: string
 
     @ApiProperty({ example: 'категория товара', description: 'крема' })
-    readonly category: string
+    readonly category: mongoose.Schema.Types.ObjectId
 
     @ApiProperty({ example: 'тег', description: '...' })
     readonly tags: string[]

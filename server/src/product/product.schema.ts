@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose'
 import { User } from '../users/user.schema'
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger"
+import { Caterogy } from '../category/category.schema'
 
 export type ProductDocument = Product & Document;
 
@@ -21,8 +22,8 @@ export class Product {
   description: string
 
   @ApiProperty({ example: 'категория товара', description: 'крема' })
-  @Prop({ required: true })
-  category: string
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Caterogy })
+  category: Caterogy
 
   @ApiProperty({ example: 'тег', description: '...' })
   @Prop([String])
@@ -30,7 +31,7 @@ export class Product {
 
   @ApiProperty({ example: 'фотографии товара' })
   @Prop([String])
-  image: string[]
+  images: string[]
 
 }
 
