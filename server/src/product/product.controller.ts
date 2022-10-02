@@ -45,6 +45,7 @@ export class ProductController {
     @ApiOperation({ summary: 'Получить продукт по категории id' })
     @ApiResponse({ status: 200, type: [Product] })
     @Get('/productsCategory/:categoryId')
+    
     getProductsСategory(@Param('categoryId') categoryId: string) {
         return this.productService.getProductsСategory(categoryId)
     }

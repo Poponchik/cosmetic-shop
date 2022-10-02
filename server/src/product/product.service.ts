@@ -26,7 +26,7 @@ export class ProductService {
         return products
     }
     async getOneProductsId(_id: string) {
-        const products = await this.productModel.findById({_id})
+        const products = await this.productModel.findById({ _id })
         return products
     }
 

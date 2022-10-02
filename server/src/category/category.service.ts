@@ -1,42 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
-import { CreateCaterogyDto } from "./dto/create-category.dto"
-import { Caterogy, CaterogyDocument } from './category.schema'
+import { CreateCategoryDto } from "./dto/create-category.dto"
+import { Category, CategoryDocument } from './category.schema'
 import { Model } from 'mongoose'
 
 
 @Injectable()
-export class CaterogyService {
+export class CategoryService {
 
-    constructor(@InjectModel(Caterogy.name) private caterogyModel: Model<CaterogyDocument>) { }
-
-
-    async createCategory(CaterogyId: string) {
-        console.log(CaterogyId)
+    constructor(@InjectModel(Category.name) private categoryModel: Model<CategoryDocument>) { }
 
 
-        const category = await this.caterogyModel.create({ name: CaterogyId })
+    async createCategory(categoryId: string) {
+        const category = await this.categoryModel.create({ name: categoryId })
         return category
     }
 
-    async getAllCaterogy() {
-        const category = await this.caterogyModel.find()
+    async getAllCategory() {
+        const category = await this.categoryModel.find()
         return category
     }
-    // async getOneCaterogyId(_id: string) {
-    //     const category = await this.caterogyModel.findById({_id})
+    // async getOneCategoryId(_id: string) {
+    //     const category = await this.categoryModel.findById({_id})
     //     return category
     // }
 
 
-    async deleteCaterogy(_id: string) {
-        await this.caterogyModel.deleteOne({ _id })
+    async deleteCategory(_id: string) {
+        console.log("deleteCategory", _id)
+        await this.categoryModel.deleteOne({ _id })
         return 'Remove ' + _id
     }
 
 
-    async changeCaterogy(dto: CreateCaterogyDto, _id: string) {
-        const category = await this.caterogyModel.findOneAndUpdate({ _id }, { "$set": dto }, { new: true })
+    async changeCategory(dto: CreateCategoryDto, _id: string) {
+        const category = await this.categoryModel.findOneAndUpdate({ _id }, { "$set": dto }, { new: true })
         return category
     }
 

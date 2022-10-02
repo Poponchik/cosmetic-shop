@@ -1,52 +1,52 @@
 import { Body, Controller, Post, Get, Delete, Param } from '@nestjs/common'
-import { CaterogyService } from './category.service'
+import { CategoryService } from './category.service'
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger"
-import { Caterogy } from "./category.schema"
-import { CreateCaterogyDto } from "./dto/create-category.dto"
+import { Category } from "./category.schema"
+import { CreateCategoryDto } from "./dto/create-category.dto"
 
 
 @ApiTags('Категории')
 @Controller('category')
-export class CaterogyController {
+export class CategoryController {
 
-    constructor(private caterogyService: CaterogyService) { }
+    constructor(private categoryService: CategoryService) { }
 
 
     @ApiOperation({ summary: 'Добавить категорию' })
-    @ApiResponse({ status: 200, type: Caterogy })
-    @Post('/createCaterogy/:caterogyId')
-    createCategory(@Param('caterogyId') CaterogyId: string) {
-        return this.caterogyService.createCategory(CaterogyId)
+    @ApiResponse({ status: 200, type: Category })
+    @Post('/createCategory/:categoryId')
+    createCategory(@Param('categoryId') categoryId: string) {
+        return this.categoryService.createCategory(categoryId)
     }
 
     @ApiOperation({ summary: 'Получить все категории' })
-    @ApiResponse({ status: 200, type: [Caterogy] })
-    @Get('/caterogyAll/')
-    getAllCaterogy() {
-        return this.caterogyService.getAllCaterogy()
+    @ApiResponse({ status: 200, type: [Category] })
+    @Get('/categoryAll/')
+    getAllCategory() {
+        return this.categoryService.getAllCategory()
     }
 
     // @ApiOperation({ summary: 'Получить категорию по id' })
-    // @ApiResponse({ status: 200, type: Caterogy })
+    // @ApiResponse({ status: 200, type: Category })
     // @Get('/category/:id')
-    // getOneCaterogyId(@Param('id') id: string) {
-    //     return this.caterogyService.getOneCaterogyId(id)
+    // getOneCategoryId(@Param('id') id: string) {
+    //     return this.categoryService.getOneCategoryId(id)
     // }
 
     @ApiOperation({ summary: 'Удалить категорию по id' })
-    @ApiResponse({ status: 200, type: Caterogy })
-    @Delete('/deleteCaterogy/:id')
-    deleteCaterogy(@Param('id') id: string) {
-        return this.caterogyService.deleteCaterogy(id)
+    @ApiResponse({ status: 200, type: Category })
+    @Delete('/deleteCategory/:id')
+    deleteCategory(@Param('id') id: string) {
+        return this.categoryService.deleteCategory(id)
     }
 
     @ApiOperation({ summary: 'изменить категорию по id' })
-    @ApiResponse({ status: 200, type: Caterogy })
-    @Post('/changeCaterogy/:id')
-    changeCaterogy(
-        @Body() CaterogyDto: CreateCaterogyDto,
+    @ApiResponse({ status: 200, type: Category })
+    @Post('/changeCategory/:id')
+    changeCategory(
+        @Body() CategoryDto: CreateCategoryDto,
         @Param('id') id: string) {
-        return this.caterogyService.changeCaterogy(CaterogyDto, id)
+        return this.categoryService.changeCategory(CategoryDto, id)
     }
 
 

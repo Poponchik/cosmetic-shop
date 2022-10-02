@@ -3,10 +3,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Document } from 'mongoose'
 import { ApiProperty } from "@nestjs/swagger"
 
-export type CaterogyDocument = Caterogy & Document;
+export type CategoryDocument = Category & Document;
 
 @Schema()
-export class Caterogy {
+export class Category {
 
   @ApiProperty({ example: 'название категории', description: 'крем' })
   @Prop({ required: true })
@@ -14,5 +14,5 @@ export class Caterogy {
 
 }
 
-export const CaterogySchema = SchemaFactory.createForClass(Caterogy)
+export const CategorySchema = SchemaFactory.createForClass(Category)
 

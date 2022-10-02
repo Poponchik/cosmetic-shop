@@ -1,26 +1,26 @@
 import { forwardRef, Module } from '@nestjs/common'
-import { CaterogyController } from './category.controller'
-import { CaterogyService } from './category.service'
-import { Caterogy, CaterogySchema } from '../category/category.schema'
+import { CategoryController } from './category.controller'
+import { CategoryService } from './category.service'
+import { Category, CategorySchema } from '../category/category.schema'
 import { MongooseModule } from '@nestjs/mongoose'
 
 import { ProductModule } from '../product/product.module'
 
 
 @Module({
-  controllers: [CaterogyController],
-  providers: [CaterogyService],
+  controllers: [CategoryController],
+  providers: [CategoryService],
   imports: [
     MongooseModule.forFeature([
-      { name: Caterogy.name, schema: CaterogySchema }
+      { name: Category.name, schema: CategorySchema }
     ]),
     // forwardRef(() => ProductModule)
     // ProductModule
 
   ],
-  exports: [CaterogyService]
+  exports: [CategoryService]
 })
-export class CaterogyModule { }
+export class CategoryModule { }
 
 
 
