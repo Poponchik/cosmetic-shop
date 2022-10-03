@@ -18,6 +18,9 @@ export class User {
   @Prop({ required: true })
   password: string
 
+  @ApiProperty({ example: 'роль' })
+  @Prop({unique: true, required: true, default: 'USER'})
+  role: string
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
