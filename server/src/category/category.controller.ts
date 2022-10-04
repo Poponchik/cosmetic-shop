@@ -1,12 +1,13 @@
 import { Body, Controller, Post, Get, Delete, Param, UseGuards } from '@nestjs/common'
 import { CategoryService } from './category.service'
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger"
-import { Category } from "./category.schema"
-import { CreateCategoryDto } from "./dto/create-category.dto"
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { Category } from './category.schema'
+import { CreateCategoryDto } from './dto/create-category.dto'
 
 import { Roles } from '../auth/roles-auth.decorator'
-import { RolesGuard } from "../auth/roles.guard"
+import { RolesGuard } from '../auth/roles.guard'
 
+import { Role } from '../shared/index'
 @ApiTags('Категории')
 @Controller('category')
 export class CategoryController {
@@ -16,7 +17,7 @@ export class CategoryController {
 
     @ApiOperation({ summary: 'Добавить категорию' })
     @ApiResponse({ status: 200, type: Category })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Post('/createCategory/:categoryId')
     createCategory(@Param('categoryId') categoryId: string) {
@@ -33,7 +34,7 @@ export class CategoryController {
 
     @ApiOperation({ summary: 'Удалить категорию по id' })
     @ApiResponse({ status: 200, type: Category })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Delete('/deleteCategory/:id')
     deleteCategory(@Param('id') id: string) {
@@ -42,7 +43,7 @@ export class CategoryController {
 
     @ApiOperation({ summary: 'изменить категорию по id' })
     @ApiResponse({ status: 200, type: Category })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Post('/changeCategory/:id')
     changeCategory(

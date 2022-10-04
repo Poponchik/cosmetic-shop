@@ -1,12 +1,13 @@
 import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards } from '@nestjs/common'
 import { ProductService } from './product.service'
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger"
-import { Product } from "./product.schema"
-import { CreateProductDto } from "./dto/create-product.dto"
-import { FilesInterceptor } from "@nestjs/platform-express"
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { Product } from './product.schema'
+import { CreateProductDto } from './dto/create-product.dto'
+import { FilesInterceptor } from '@nestjs/platform-express'
 import { Roles } from '../auth/roles-auth.decorator'
-import { RolesGuard } from "../auth/roles.guard"
+import { RolesGuard } from '../auth/roles.guard'
 
+import { Role } from '../shared/index'
 @ApiTags('Продукты')
 @Controller('product')
 export class ProductController {
@@ -17,7 +18,7 @@ export class ProductController {
 
     @ApiOperation({ summary: 'Добавить продукт' })
     @ApiResponse({ status: 200, type: Product })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Post('/createProduct/:categoryId')
     @UseInterceptors(FilesInterceptor('images'))
@@ -50,7 +51,7 @@ export class ProductController {
 
     @ApiOperation({ summary: 'Удалить товар по id' })
     @ApiResponse({ status: 200, type: Product })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Delete('/deleteProduct/:id')
     deleteProduct(@Param('id') id: string) {
@@ -59,7 +60,7 @@ export class ProductController {
 
     @ApiOperation({ summary: 'изменить товар по id' })
     @ApiResponse({ status: 200, type: Product })
-    @Roles('ADMIN')
+    @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @UseInterceptors(FilesInterceptor('images'))
     @Post('/changeProduct/:id')

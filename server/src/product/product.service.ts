@@ -41,7 +41,6 @@ export class ProductService {
 
     async deleteProduct(_id: string) {
         const { images } = await this.productModel.findById(_id)
-        console.log(images)
         images.forEach((image) => {
             fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
         })
@@ -56,7 +55,7 @@ export class ProductService {
             fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
         })
         const fileName = await this.fileService.createFile(images)
-        const products = await this.productModel.findOneAndUpdate({ _id }, { "$set": dto, images: fileName }, { new: true })
+        const products = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
         return products
     }
 

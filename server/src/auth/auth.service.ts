@@ -16,7 +16,6 @@ export class AuthService {
 
     async login(userDto: CreateUserDto) {
         const user = await this.validateUser(userDto)
-        // console.log(user)
         return this.generateToken(user)
     }
 
@@ -31,6 +30,7 @@ export class AuthService {
         return this.generateToken(user)
     }
 
+
     private async generateToken(user: User) {
         const payload = {
             email: user.email,
@@ -40,6 +40,7 @@ export class AuthService {
             token: this.jwtServise.sign(payload)
         }
     }
+
 
     private async validateUser(userDto: CreateUserDto) {
         const user = await this.userService.getUserByEmail(userDto.email)
