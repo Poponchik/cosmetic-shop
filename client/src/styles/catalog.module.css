@@ -6,6 +6,7 @@
 
 
 .catalog_page {
+    display: block;
     margin-top: 80px;
 }
 
@@ -45,7 +46,7 @@
 .catalog_block {
     margin-top: 40px;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 
@@ -145,7 +146,7 @@
     cursor: pointer;
     text-decoration: underline;
 }
- 
+
 .product_cart {
     display: inline-block;
     padding: 16px 24px;
@@ -238,9 +239,9 @@
 
 }
 
-.show_button:hover{
+.show_button:hover {
     background-color: #FFF2E9;
-    transition:  0.5s;
+    transition: 0.5s;
 
 }
 
@@ -249,7 +250,7 @@
 }
 
 .products_viewed_title {
-   
+
     text-align: left;
     font-size: 24px;
     font-weight: 700;
@@ -262,17 +263,34 @@
     margin: 32px 0 60px 0;
 }
 
+.filter_sort{
+    display: flex;
+    justify-content:space-between;
+}
+
+.filter_block{
+    display: none;
+
+}
+
 .dropdown_sort {
     position: relative;
     display: inline-block;
-    float: right;
+    margin-right: 0;
+    margin-left: auto;
 }
 
-.link{
+.sort{
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right;
+}
+
+.link {
     color: #333;
 }
 
-.link:hover{
+.link:hover {
     color: #333;
 }
 
@@ -303,10 +321,10 @@
     display: block;
 }
 
-.link{
+.link {
     text-decoration: none;
-  }
-  
+}
+
 
 .dropdown_content a:hover {
     border-radius: 4px;
@@ -318,17 +336,93 @@
     display: block;
 }
 
-.arrow_left{
+.arrow_left {
     position: absolute;
     left: 70px;
     color: #DBDBDB;
     cursor: pointer;
 }
 
-.arrow_right{
+.arrow_right {
     position: absolute;
     right: 70px;
     color: #9D9D9D;
     cursor: pointer;
 }
 
+@media screen and (max-width: 834px) {
+
+    .inner_container {
+        width: 688px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .catalog_block {
+        justify-content: start;
+        margin: 0 auto;
+        width: 100%;
+
+        display: block;
+        margin: 0 auto;
+    }
+
+    .filters_block {
+        width: 0;
+        display: none;
+    }
+
+  
+
+    .products_block {
+        width: 100%;
+        gap: 16px;
+        margin: 0 auto;
+    }
+
+    .product_photo{
+        width: 280px;
+    }
+
+    .product_cart{
+        padding-bottom: 79,8%;
+        min-width: 336px;
+
+    }
+
+    .products_viewed{
+        overflow: scroll;
+        gap: 16px;
+        padding: 2px;
+    }
+
+    .filter_sort{
+        margin: 32px 0 20px 0;
+    }
+
+    .filter_block{
+        display: flex;
+        align-items: center;
+        gap:4px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .arrow_left, .arrow_right{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 375px) {
+
+    .inner_container {
+        width: 336px;
+    }
+
+    .filter_sort{
+        margin: 24px 0 16px 0;
+    }
+
+
+}

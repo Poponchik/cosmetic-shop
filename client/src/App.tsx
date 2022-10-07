@@ -4,6 +4,8 @@ import Catalog from "./Catalog";
 import Cart from "./Cart";
 import ProductCard from "./ProductCard";
 import Login from "./Login";
+import AddProduct from "./AddProduct";
+import Admin from "./Admin";
 import Registration from "./Registration";
 import * as React from "react";
 import "@fontsource/montserrat-alternates";
@@ -15,6 +17,8 @@ function App() {
       <Routes>
       
         <Route path="/product" element={<Layout><ProductCard/></Layout>} />
+        <Route path="/admin" element={<Layout><Admin/></Layout>} />
+        <Route path="/newProduct" element={<Layout><AddProduct/></Layout>} />
         <Route path="/auth/login" element={<Login/>} />
         <Route path="/auth/registration" element={<Registration/>} />
         <Route  path="/" element={<Layout><Main /></Layout>}/>

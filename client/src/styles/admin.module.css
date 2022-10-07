@@ -1,0 +1,141 @@
+.inner_container {
+    width: 1040px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.admin_page {
+    margin-top: 80px;
+    gap: 100px;
+}
+
+.page_title{
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.products {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.product_cart {
+    display: inline-block;
+    padding: 16px 24px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    transition: all 0.3s ease-in;
+    margin-bottom: 16px;
+    text-align: left;
+
+}
+
+.product_photo {
+    object-fit: cover;
+    width: 200px;
+}
+
+.title_product {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+.description_product {
+    font-size: 12px;
+    color: #797979;
+    width: 200px;
+    margin: 8px 0 12px 0;
+    line-height: 150%;
+
+}
+
+.price_block {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    justify-content: space-between;
+}
+
+.price_product {
+    color: #FB9B5A;
+    font-weight: 700;
+    font-size: 14px;
+
+}
+
+.small_button {
+    background: #FB9B5A;
+    border: none;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    opacity: 0;
+}
+
+.product_cart:hover .small_button {
+    opacity: 1;
+    transition: 0.5s;
+
+}
+
+.product_cart:hover {
+    box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+}
+
+.products_block {
+    width:100%;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.show_button {
+    color: #FB9B5A;
+    background-color: #fff;
+    border: 1px solid #FB9B5A;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    margin-top: 40px;
+    transition: all 0.3s ease-in;
+}
+
+.show_button:hover {
+    background-color: #FFF2E9;
+    transition: 0.5s;
+}
+
+.add_product_btn{
+    background: #FB9B5A;
+    border: none;
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin: 20px 0 16px 0;
+    transition: all 0.3s ease-in;
+
+}
+
+.add_product_btn:hover{
+    background-color: #F4873D;
+    transition: 0.5s;
+
+}
+
+.link:hover{
+    color: #333;
+}
+
+.icons{
+    display: flex;
+    gap: 4px;
+
+}
