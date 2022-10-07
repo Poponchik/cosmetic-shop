@@ -4,6 +4,8 @@ import { FaUser } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
+import { FaSearch } from "react-icons/fa";
+import { HiMenuAlt2 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -63,19 +65,43 @@ function Header() {
             </div>
 
             <div className={styles.icons}>
+              <Link to="/" className={styles.link}>
+                <FaSearch size={22} className={styles.icon_search_adaptive} />
+              </Link>
+
               {localStorage.getItem("token") ? (
                 <Link to="/auth/login" className={styles.link}>
-                  <FiLogOut size={22} onClick={logout} />
+                  <FiLogOut
+                    size={22}
+                    onClick={logout}
+                    className={styles.icon}
+                  />
                 </Link>
               ) : (
-                <Link to="/auth/login" className={styles.link}>
-                  <FaUser size={22}  />
-                </Link>
+                <></>
               )}
 
+              <div className={styles.dropdown}>
+                <FaUser size={22} className={styles.icon} />
+                <div className={styles.dropdown_content}>
+                  <p> My orders</p>
+                  <Link to="/admin" className={styles.link}>
+                    <p>Admin</p>
+                  </Link>
+
+                  <Link to="/auth/login" className={styles.link}>
+                    <p>Log out</p>
+                  </Link>
+                </div>
+              </div>
+
               <Link to="/cart" className={styles.link}>
-                <FaShoppingCart size={22} />
+                <FaShoppingCart size={22} className={styles.icon_cart} />
               </Link>
+            </div>
+            <div className={styles.tablet_menu}>
+              <p className={styles.menu}>Menu</p>
+              <HiMenuAlt2 size={22} className={styles.icon_burger} />
             </div>
           </div>
         </div>

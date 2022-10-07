@@ -2,6 +2,7 @@ import * as React from "react";
 import styles from "./styles/catalog.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
+import { GoSettings } from "react-icons/go";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
@@ -20,12 +21,18 @@ function Catalog() {
 
               <div className={styles.category_catalog}>Facial skin care</div>
 
-              <div className={styles.dropdown_sort}>
-                <span className={styles.sort}>Sort by:</span>
-                <div className={styles.dropdown_content}>
-                  <a href="#">Default</a>
-                  <a href="#">Ascending price</a>
-                  <a href="#">Descending price</a>
+              <div className={styles.filter_sort}>
+                <div className={styles.filter_block}>
+                  <GoSettings size={18}/>
+                  <p>Filter</p>
+                </div>
+                <div className={styles.dropdown_sort}>
+                  <span className={styles.sort}>Sort by:</span>
+                  <div className={styles.dropdown_content}>
+                    <a href="#">Default</a>
+                    <a href="#">Ascending price</a>
+                    <a href="#">Descending price</a>
+                  </div>
                 </div>
               </div>
 
@@ -100,93 +107,6 @@ function Catalog() {
                     </div>
                   </div>
 
-                  <div className={styles.preparation_filter}>
-                    <p className={styles.preparation}>Skin type</p>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                  </div>
-
-                  <div className={styles.preparation_filter}>
-                    <p className={styles.preparation}>Desired effect</p>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                    <div className={styles.type}>
-                      <input
-                        type="checkbox"
-                        className={styles.checkbox}
-                      ></input>
-                      <p className={styles.type_product}>Washing gel</p>
-                      <p className={styles.count_products}>(10)</p>
-                    </div>
-                  </div>
                   <p className={styles.reset_filters}>Reset filters</p>
                 </div>
 
