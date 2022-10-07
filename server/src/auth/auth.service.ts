@@ -19,6 +19,7 @@ export class AuthService {
         return this.generateToken(user)
     }
 
+
     async register(userDto: CreateUserDto) {
         const candidate = await this.userService.getUserByEmail(userDto.email)
         if (candidate) {
@@ -29,15 +30,17 @@ export class AuthService {
         return this.generateToken(user)
     }
 
+
     private async generateToken(user: User) {
         const payload = {
-            email: user.email
-            // id: user._id
+            email: user.email,
+            role: user.role
         }
         return {
             token: this.jwtServise.sign(payload)
         }
     }
+
 
     private async validateUser(userDto: CreateUserDto) {
         const user = await this.userService.getUserByEmail(userDto.email)

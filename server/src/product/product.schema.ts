@@ -2,10 +2,10 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
 import { User } from '../users/user.schema'
 import { Document } from 'mongoose'
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger'
 import { Category } from '../category/category.schema'
 
-export type ProductDocument = Product & Document;
+export type ProductDocument = Product & Document
 
 @Schema()
 export class Product {

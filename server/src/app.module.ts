@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common'
+import { Module, forwardRef } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { ConfigModule } from '@nestjs/config'
 import { UsersModule } from './users/users.module'
@@ -15,6 +15,7 @@ import * as path from 'path'
     controllers: [],
     providers: [],
     imports: [
+        forwardRef(() => AuthModule),
         ConfigModule.forRoot({
             envFilePath: `.env`,
         }),
@@ -27,7 +28,6 @@ import * as path from 'path'
         ProductModule,
         FilesModule,
         CategoryModule
-
     ],
 })
 export class AppModule { }

@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-// import * as mongoose from 'mongoose'
 import { Document } from 'mongoose'
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger'
 
-export type CategoryDocument = Category & Document;
+export type CategoryDocument = Category & Document
 
 @Schema()
 export class Category {

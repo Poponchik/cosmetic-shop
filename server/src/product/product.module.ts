@@ -5,6 +5,7 @@ import { Product, ProductSchema } from '../product/product.schema'
 import { MongooseModule } from '@nestjs/mongoose'
 import { FilesModule } from '../files/files.module'
 import { UsersModule } from '../users/users.module'
+import { AuthModule } from '../auth/auth.module'
 
 
 
@@ -21,7 +22,8 @@ import { UsersModule } from '../users/users.module'
       { name: Product.name, schema: ProductSchema }
     ]),
     forwardRef(() => UsersModule),
-    FilesModule
+    FilesModule,
+    AuthModule
   ],
 })
 export class ProductModule {}

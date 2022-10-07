@@ -3,8 +3,8 @@ import { CategoryController } from './category.controller'
 import { CategoryService } from './category.service'
 import { Category, CategorySchema } from '../category/category.schema'
 import { MongooseModule } from '@nestjs/mongoose'
+import { AuthModule } from '../auth/auth.module'
 
-import { ProductModule } from '../product/product.module'
 
 
 @Module({
@@ -14,9 +14,7 @@ import { ProductModule } from '../product/product.module'
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema }
     ]),
-    // forwardRef(() => ProductModule)
-    // ProductModule
-
+    AuthModule
   ],
   exports: [CategoryService]
 })

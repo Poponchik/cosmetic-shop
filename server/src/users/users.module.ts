@@ -16,12 +16,11 @@ import { AuthModule } from '../auth/auth.module'
     ]),
     forwardRef(() => AuthModule),
   ],
-  exports:
-    [
-      UsersService
-    ]
-  })
-  export class UsersModule { }
+  exports: [
+    UsersService
+  ]
+})
+export class UsersModule { }
 
 
 

@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common'
 import { Product, ProductDocument } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { FilesService } from '../files/files.service';
+import { FilesService } from '../files/files.service'
 import * as path from 'path'
 import * as fs from 'fs'
+
+// import { Role } from './product.controller'
+
+
 
 @Injectable()
 export class ProductService {
@@ -51,7 +55,7 @@ export class ProductService {
             fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
         })
         const fileName = await this.fileService.createFile(images)
-        const products = await this.productModel.findOneAndUpdate({ _id }, { "$set": dto, images: fileName }, { new: true })
+        const products = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
         return products
     }
 
