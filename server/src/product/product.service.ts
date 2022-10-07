@@ -20,8 +20,8 @@ export class ProductService {
     async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
 
         const fileName = await this.fileService.createFile(images)
-        const products = await this.productModel.create({ ...dto, images: fileName, category: categoryId })
-        return products
+        const product = await this.productModel.create({ ...dto, images: fileName, category: categoryId })
+        return product
     }
 
 
@@ -30,8 +30,8 @@ export class ProductService {
         return products
     }
     async getOneProductsId(_id: string) {
-        const products = await this.productModel.findById({ _id })
-        return products
+        const product = await this.productModel.findById({ _id })
+        return product
     }
 
     async getProductsСategory(categoryId: string) {
@@ -55,8 +55,8 @@ export class ProductService {
             fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
         })
         const fileName = await this.fileService.createFile(images)
-        const products = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
-        return products
+        const product = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
+        return product
     }
 
 
