@@ -19,10 +19,10 @@ export class CategoryController {
     @ApiResponse({ status: 200, type: Category })
     @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
-    @Post('/createCategory/:categoryId')
-    createCategory(@Param('categoryId') categoryId: string) {
-        return this.categoryService.createCategory(categoryId)
-    }
+    @Post('/createCategory/')
+    createCategory(@Body() CategoryDto: CreateCategoryDto) {
+    return this.categoryService.createCategory(CategoryDto)
+}
 
     @ApiOperation({ summary: 'Получить все категории' })
     @ApiResponse({ status: 200, type: [Category] })
