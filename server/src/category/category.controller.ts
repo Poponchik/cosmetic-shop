@@ -14,40 +14,40 @@ export class CategoryController {
 
     @ApiOperation({ summary: 'Добавить категорию' })
     @ApiResponse({ status: 200, type: Category })
-    @Post('/createCategory/:categoryId')
-    createCategory(@Param('categoryId') categoryId: string) {
-        return this.categoryService.createCategory(categoryId)
-    }
+    @Post('/createCategory/')
+    createCategory(@Body() CategoryDto: CreateCategoryDto) {
+    return this.categoryService.createCategory(CategoryDto)
+}
 
-    @ApiOperation({ summary: 'Получить все категории' })
-    @ApiResponse({ status: 200, type: [Category] })
-    @Get('/categoryAll/')
-    getAllCategory() {
-        return this.categoryService.getAllCategory()
-    }
+@ApiOperation({ summary: 'Получить все категории' })
+@ApiResponse({ status: 200, type: [Category] })
+@Get('/categoryAll/')
+getAllCategory() {
+    return this.categoryService.getAllCategory()
+}
 
-    // @ApiOperation({ summary: 'Получить категорию по id' })
-    // @ApiResponse({ status: 200, type: Category })
-    // @Get('/category/:id')
-    // getOneCategoryId(@Param('id') id: string) {
-    //     return this.categoryService.getOneCategoryId(id)
-    // }
+// @ApiOperation({ summary: 'Получить категорию по id' })
+// @ApiResponse({ status: 200, type: Category })
+// @Get('/category/:id')
+// getOneCategoryId(@Param('id') id: string) {
+//     return this.categoryService.getOneCategoryId(id)
+// }
 
-    @ApiOperation({ summary: 'Удалить категорию по id' })
-    @ApiResponse({ status: 200, type: Category })
-    @Delete('/deleteCategory/:id')
-    deleteCategory(@Param('id') id: string) {
-        return this.categoryService.deleteCategory(id)
-    }
+@ApiOperation({ summary: 'Удалить категорию по id' })
+@ApiResponse({ status: 200, type: Category })
+@Delete('/deleteCategory/:id')
+deleteCategory(@Param('id') id: string) {
+    return this.categoryService.deleteCategory(id)
+}
 
-    @ApiOperation({ summary: 'изменить категорию по id' })
-    @ApiResponse({ status: 200, type: Category })
-    @Post('/changeCategory/:id')
-    changeCategory(
+@ApiOperation({ summary: 'изменить категорию по id' })
+@ApiResponse({ status: 200, type: Category })
+@Post('/changeCategory/:id')
+changeCategory(
         @Body() CategoryDto: CreateCategoryDto,
         @Param('id') id: string) {
-        return this.categoryService.changeCategory(CategoryDto, id)
-    }
+    return this.categoryService.changeCategory(CategoryDto, id)
+}
 
 
 }
