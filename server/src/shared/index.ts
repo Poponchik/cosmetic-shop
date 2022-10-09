@@ -12,7 +12,7 @@ export enum Role {
 
 
 export enum Status {
-    InProcessing = 'В обработке ',
+    InProcessing = 'В обработке',
     Sent = 'Отправлен',
     Completed = 'Выполнен'
 }

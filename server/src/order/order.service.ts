@@ -4,19 +4,45 @@ import { CreateOrderDto } from './dto/create-order.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 // import { Role } from './product.controller'
-
+import { Status } from '../shared/index'
+// import { productModel } from '../shared/index'
+import { ProductService } from '../product/product.service'
+import { Product, ProductDocument } from '../product/product.schema'
 
 
 @Injectable()
 export class OrderService {
 
-    constructor(@InjectModel(Order.name) private orderModel: Model<OrderDocument>) { }
+    constructor(@InjectModel(Order.name) private orderModel: Model<OrderDocument>,
+        private productModel: ProductService
+        ) { }
 
-    async createOrder(dto: CreateOrderDto, userId: string) {
 
-        const order = await this.orderModel.create({ ...dto })
-        return order
-    }
+
+
+
+
+
+    // async createOrder(dto: CreateOrderDto, status) {
+        // let sum = 0
+        // dto.products.map((product) => console.log(product))
+        // console.log(dto.products[0].quantity)
+        // this.productModel.find(el => console.log(el))
+        // dto.products.map(() => {})
+        // dto.products.map((product) => {
+        //     sum += this.productModel.find(el => el._id == product.productsId)
+        //     this.productModel.find(el => console.log(el))
+        // })
+
+
+
+
+        
+        // const order = await this.orderModel.create({ ...dto, status })
+        // return order
+    // }
+
+    // console.log(q2)
 
 
     // async getAllProducts() {

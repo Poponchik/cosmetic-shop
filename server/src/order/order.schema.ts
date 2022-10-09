@@ -47,7 +47,7 @@ export class Order {
 
   @ApiProperty({ example: 'массив id товаров' })
   @Prop([Object])
-  products: Object[]
+  products: string[]
 
 }
 
