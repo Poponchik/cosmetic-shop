@@ -1,9 +1,10 @@
 
-import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards } from '@nestjs/common'
+import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards, Header, Req } from '@nestjs/common'
 import { OrderService } from '../order/order.service'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Order } from './order.schema'
 import { CreateOrderDto } from './dto/create-order.dto'
+
 import { FilesInterceptor } from '@nestjs/platform-express'
 
 import { Roles } from '../auth/roles-auth.decorator'
@@ -11,7 +12,8 @@ import { RolesGuard } from '../auth/roles.guard'
 
 import { Status } from '../shared/index'
 
-
+import { Request } from 'express'
+import { CreateUserDto } from '../users/dto/create-user.dto'
 
 
 
@@ -31,8 +33,10 @@ export class OrderController {
     // @UseGuards(RolesGuard)
     @Post('/createOrder/')
     createOrder(
-        @Body() OrderDto: CreateOrderDto) {
-        return this.orderService.createOrder(OrderDto, Status.InProcessing)
+        // @Header() authorization: dd,
+        @Req() req: Request,
+        @Body() OrderDto: CreateOrderDto, userDto: CreateUserDto) {
+        return this.orderService.createOrder(OrderDto, userDto, Status.InProcessing, req )
     }
 
 

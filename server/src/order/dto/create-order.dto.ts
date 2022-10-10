@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger'
 import * as mongoose from 'mongoose'
 
-interface IProducts {
+export interface IProducts {
     [products: string]: 
         {
-            productsId: string
+            productId: string
             quantity: number
-    }
+    },
     
 }
 
