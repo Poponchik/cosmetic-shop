@@ -1,13 +1,10 @@
 import * as React from "react";
 import styles from "./styles/addProduct.module.css";
-import classNames from "classnames";
-import { Link } from "react-router-dom";
-import { AiFillEdit } from "react-icons/ai";
 import { AiFillDelete } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import dataService from "./ds";
 
-function AddProduct() {
+function EditProduct() {
   const [name, setName] = useState<string>("");
   const [images, setImages] = useState<Array<File>>([]);
   const [description, setDescription] = useState<string>("");
@@ -59,7 +56,7 @@ function AddProduct() {
       <div className={styles.inner_container}>
         <div className={styles.add_product_page_div}>
           <div className={styles.add_product_page}>
-            <h1 className={styles.page_title}>Add new product</h1>
+            <h1 className={styles.page_title}>Edit product</h1>
             <div className={styles.add_product_form}>
               <div>
                 <p className={styles.input_title}>Product title:</p>
@@ -147,4 +144,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default EditProduct;

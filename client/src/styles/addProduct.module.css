@@ -1,5 +1,3 @@
-
-
 .inner_container {
     width: 1040px;
     margin: 0 auto;
@@ -21,7 +19,7 @@
     margin-bottom: 20px;
 }
 
-.add_product_page_div{
+.add_product_page_div {
     margin-bottom: 40px;
 
 }
@@ -57,11 +55,11 @@ input[type="file"] {
 
 .custom_file_upload {
     border-radius: 4px;
-  
+
     border: 1px solid #AAAAAA;
     display: inline-block;
-    display: flex; 
-    justify-content:space-around;
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 12px;
     text-align: left;
     padding: 6px 12px;
@@ -87,7 +85,7 @@ input[type="file"] {
     width: 100px;
 }
 
-.button_submit{
+.button_submit {
     background: #FB9B5A;
     border: none;
     color: #fff;
@@ -95,33 +93,83 @@ input[type="file"] {
     font-size: 16px;
     padding: 8px 24px;
     border-radius: 4px;
-    display: flex; 
+    display: flex;
     margin-top: 4px;
-    justify-content:space-around;
+    justify-content: space-around;
     transition: all 0.3s ease-in;
 
 }
 
-.button_submit:hover{
-    background-color:#F4873D;
+.button_submit:hover {
+    background-color: #F4873D;
     cursor: pointer;
     transition: 0.5s;
 
 }
 
-.dropdown, ul.submenu {
+.dropdown,
+ul.submenu {
     display: none;
-  }
-  
-  /*position the label*/
-  label {
+}
+
+/*position the label*/
+label {
     position: relative;
     display: block;
     cursor: pointer;
-  }
-  
-  /*show the submenu when input is checked*/
-  .dropdown:checked~ul.submenu {
-    display: block;
-  }
+}
 
+/*show the submenu when input is checked*/
+.dropdown:checked~ul.submenu {
+    display: block;
+}
+
+.preview_images {
+    display: flex;
+    gap: 8px;
+    flex-flow: row wrap;
+    margin-bottom: 12px;
+}
+
+.preview_image {
+    object-fit: cover;
+    width: 100px;
+    height: 100px;
+    -webkit-filter: brightness(100%);
+    border-radius: 4px;
+}
+
+
+.image_block:hover {
+    -webkit-filter: brightness(50%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 0.5s ease;
+    z-index: 0;
+}
+
+.image_block {
+    position: relative;
+}
+
+.icon_delete {
+    position: absolute;
+    z-index: 100000;
+    left: 0; 
+    top:0;
+    bottom: 0;
+    right: 0; 
+    margin-left: auto; 
+    margin-top: auto; 
+    margin-bottom: auto; 
+    margin-right: auto; 
+    color: #fff;
+    opacity: 0;
+}
+
+.image_block:hover .icon_delete {
+    opacity: 1;
+    transition: all 0.5s ease;
+}

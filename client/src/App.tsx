@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import ProductCard from "./ProductCard";
 import Login from "./Login";
 import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
 import Admin from "./Admin";
 import Registration from "./Registration";
 import * as React from "react";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/product" element={<Layout><ProductCard/></Layout>} />
         <Route path="/admin" element={<Layout><Admin/></Layout>} />
         <Route path="/newProduct" element={<Layout><AddProduct/></Layout>} />
+        <Route path="/editProduct" element={<Layout><EditProduct/></Layout>} />
         <Route path="/auth/login" element={<Login/>} />
         <Route path="/auth/registration" element={<Registration/>} />
         <Route  path="/" element={<Layout><Main /></Layout>}/>

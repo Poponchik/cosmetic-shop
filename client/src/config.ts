@@ -19,7 +19,7 @@ export const authorizedAxios = axios.create({
     baseURL: config.serverUrl
 });
 
-authorizedAxios.defaults.headers.common['authorization'] = JSON.parse(localStorage.getItem('userData')!)?.accessToken;
+authorizedAxios.defaults.headers.common['authorization'] = `Bearer ${localStorage.getItem('token')!}`;
 
 export const unauthorizedAxios = axios.create({
     baseURL: config.serverUrl

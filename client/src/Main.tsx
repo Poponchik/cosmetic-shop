@@ -9,8 +9,25 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import dataService from "./ds";
+import {Product} from "./types"
+import { useState, useEffect } from "react";
 
-function Header() {
+
+function Main() {
+  const [products, setProducts] = useState<Array<Product>>([]);
+
+  async function getProducts() {
+    const { data } = await dataService.product.getAllProducts();
+    setProducts(data);
+
+    console.log(data);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <React.Fragment>
       {/* <body> */}
@@ -98,28 +115,35 @@ function Header() {
             <IoIosArrowBack className={styles.arrow_left} size={24} />
 
             <div className={styles.products}>
-              <Link to="/product" className={styles.link}>
-                <div className={styles.product_cart}>
-                  <img
-                    src="./images/product1.png"
-                    className={styles.product_photo}
-                  ></img>
-                  <p className={styles.title_product}>Body Scrub</p>
-                  <div className={styles.description_product}>
-                    <p>Anti-cellulite coffee scrub with red pepper,</p>
-                    <p>300g</p>
-                  </div>
-                  <div className={styles.price_block}>
-                    <p className={styles.price_product}> 150 ₴</p>
-                    <button
-                      className={classNames(styles.small_button, styles.button)}
-                    >
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
-              </Link>
-              <Link to="/product" className={styles.link}>
+              {products.map((product) => {
+                return (
+                  <Link to="/product" className={styles.link}>
+                    <div className={styles.product_cart}>
+                      <img
+                        src="./images/product1.png"
+                        className={styles.product_photo}
+                      ></img>
+                      <p className={styles.title_product}>{product.name}</p>
+                      <div className={styles.description_product}>
+                        <p>{product.description}</p>
+                      </div>
+                      <div className={styles.price_block}>
+                        <p className={styles.price_product}>{product.price}</p>
+                        <button
+                          className={classNames(
+                            styles.small_button,
+                            styles.button
+                          )}
+                        >
+                          Add to cart
+                        </button>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+
+              {/* <Link to="/product" className={styles.link}>
                 <div className={styles.product_cart}>
                   <img
                     src="./images/product2.png"
@@ -183,7 +207,7 @@ function Header() {
                     </button>
                   </div>
                 </div>
-              </Link>
+              </Link> */}
             </div>
             <IoIosArrowForward className={styles.arrow_right} size={24} />
           </div>
@@ -354,4 +378,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Main;

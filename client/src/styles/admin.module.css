@@ -17,12 +17,13 @@
 
 .products {
     display: flex;
-    justify-content: space-between;
+    gap: 16px;
     flex-flow: row wrap;
 }
 
 .product_cart {
     display: inline-block;
+    max-width: 248px;
     padding: 16px 24px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;

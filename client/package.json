@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/bootstrap": "^5.2.4",
+    "axios": "^1.1.2",
     "classnames": "^2.3.2",
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "dev":"cross-env REACT_APP_ENV=development react-scripts build",
+    "dev": "cross-env REACT_APP_ENV=development react-scripts build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
