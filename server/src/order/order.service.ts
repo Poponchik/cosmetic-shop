@@ -10,7 +10,7 @@ import { Model } from 'mongoose'
 // import { Role } from './product.controller'
 // import { productModel } from '../shared/index'
 import { ProductService } from '../product/product.service'
-import { IProducts } from './dto/create-order.dto'
+// import { IProducts } from './dto/create-order.dto'
 import { JwtService } from '@nestjs/jwt'
 
 import { UsersService } from 'src/users/users.service'
@@ -34,73 +34,23 @@ export class OrderService {
 
 
 
-
-        // let sum = 0
         let productsId = dto.products.map(product => product.productId)
-        // let allArr = dto.products.map((el) => Object.values(el))
-        let quantity = dto.products.map(product => product.quantity)
-        
-        // console.log('dto.products::', dto.products)
-        // console.log('allArr::', allArr)
-        // console.log('productId::', productsId)
-        // console.log('quantity::', quantity)
         const response = await this.productService.find({ _id: { $in: productsId } })
-        // const allArr = response.map((el) => el._id: 'string')
-
-
-
-
-        // console.log('response::', response[0]._id + '')
-        // const allArr2 = response.map((el) => el._id + '')
-
-
-        for (let i = 0; i < response.length; i++) {
-            response[i]
-        //     for (let i = 0; i < dto.products.length; i++) {
-        //         // if (response[i].includes(dto.products[i]) {
-        //         // //     // if (dto.products.productsId === response._id[i]) {
-        //         //     allArr[i] = {
-        //         //         sum: +response[i].price
-        //         //     }
-        //         // //     // sum += response[i].price * +quantity[i]
-        //         // }
-
-
-        //     }
-
-
-        }
-
-        // console.log('allArr::', allArr)
-        // console.log('allArr2::', allArr2)
-
-
-        // const authHeader = req.headers.authorization
-        // const bearer = authHeader.split(' ')[0]
-        // const token = authHeader.split(' ')[1]
-
-        // if (bearer === 'Bearer' || token) {
-        //     const user = this.jwtService.verify(token)
-        //     const candidate = await this.userService.getUserByEmail(user.email)
-        //     // console.log('user::', user.email)
-        //     // console.log('user::', userDto.email)
-        //     console.log('candidate::', candidate._id)
-        // }
 
 
 
 
 
-
-
-
-        // const order = await this.orderModel.create({ ...dto, status, totaAmount: sum, userId: candidate._id })
-        // const order = await this.orderModel.create({ ...dto, status, totaAmount: sum })
-        // return order
+        
+        const order = await this.orderModel.create({ ...dto, status })
+        console.log('order::', order)
+        return order
 
     }
 
-    // console.log(q2)
+
+
+
 
 
     // async getAllProducts() {

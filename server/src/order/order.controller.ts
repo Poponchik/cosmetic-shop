@@ -1,5 +1,5 @@
 
-import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards, Header, Req } from '@nestjs/common'
+import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards, Req } from '@nestjs/common'
 import { OrderService } from '../order/order.service'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Order } from './order.schema'
@@ -33,11 +33,14 @@ export class OrderController {
     // @UseGuards(RolesGuard)
     @Post('/createOrder/')
     createOrder(
-        // @Header() authorization: dd,
         @Req() req: Request,
-        @Body() OrderDto: CreateOrderDto, userDto: CreateUserDto) {
-        return this.orderService.createOrder(OrderDto, userDto, Status.InProcessing, req )
+        @Body() orderDto: CreateOrderDto, userDto: CreateUserDto) {
+        return this.orderService.createOrder(orderDto, userDto, Status.InProcessing, req )
     }
+
+
+
+
 
 
     // @ApiOperation({ summary: 'Получить заказы по email' })
