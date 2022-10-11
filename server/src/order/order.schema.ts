@@ -52,7 +52,7 @@ export class Order {
   timestamp: string
 
   @ApiProperty({ example: 'массив id товаров и колиество' })
-  @Prop()
+  @Prop([ProductsInOrder])
   products: [ProductsInOrder]
 
 }
