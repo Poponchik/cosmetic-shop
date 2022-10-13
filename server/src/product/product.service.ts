@@ -18,9 +18,8 @@ export class ProductService {
         private fileService: FilesService) { }
 
     async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
-
         const fileName = await this.fileService.createFile(images)
-        const product = await this.productModel.create({ ...dto, images: fileName, category: categoryId })
+        const product = await this.productModel.create({ ...dto, images: fileName, categoryId })
         return product
     }
 

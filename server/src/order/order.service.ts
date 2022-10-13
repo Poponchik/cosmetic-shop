@@ -30,24 +30,31 @@ export class OrderService {
 
 
 
-    async createOrder(dto: CreateOrderDto, userDto: CreateUserDto, status, req) {
+    async createOrder(dto: CreateOrderDto, status, req) {
 
 
-
-        let productsId = dto.products.map(product => product.productId)
+        let sum: number = 0
+        const productsId = dto.products.map(product => product.productId)
         const response = await this.productService.find({ _id: { $in: productsId } })
 
+        for (let i = 0; i < response.length; i++) {
+            for (let n = 0; n < dto.products.length; n++) {
+                if (response[i]._id.equals(dto.products[n].productId)) {
+                    sum += +response[i].price * dto.products[n].quantity
+                }
+            }
+        }
 
+        const authHeader = req.headers.authorization
+        if (authHeader) {
+            const token = authHeader.split(' ')[1]
+            const { email } = this.jwtService.verify(token)
+            var { _id } = await this.userService.getUserByEmail(email)
+        }
 
-
-
-        
-        const order = await this.orderModel.create({ ...dto, status })
-        console.log('order::', order)
+        const order = await this.orderModel.create({ ...dto, status, totalAmount: sum, userId: _id })
         return order
-
     }
-
 
 
 

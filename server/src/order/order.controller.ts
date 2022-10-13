@@ -34,8 +34,8 @@ export class OrderController {
     @Post('/createOrder/')
     createOrder(
         @Req() req: Request,
-        @Body() orderDto: CreateOrderDto, userDto: CreateUserDto) {
-        return this.orderService.createOrder(orderDto, userDto, Status.InProcessing, req )
+        @Body() orderDto: CreateOrderDto) {
+        return this.orderService.createOrder(orderDto, Status.InProcessing, req )
     }
 
 

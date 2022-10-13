@@ -25,7 +25,7 @@ export class CreateProductDto {
     readonly image: string[]
 
     @ApiProperty({ example: 'цена товара' })
-    readonly price: number
+    readonly price: string
 }
 
 

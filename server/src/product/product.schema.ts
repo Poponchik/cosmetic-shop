@@ -35,7 +35,7 @@ export class Product {
   images: string[]
   
   @ApiProperty({ example: 'цена товара' })
-  @Prop()
+  @Prop({ required: true })
   price: number
 
 }

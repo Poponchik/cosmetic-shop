@@ -11,11 +11,11 @@ export type ProductsInOrderDocument = ProductsInOrder & Document
 export class ProductsInOrder {
 
   @ApiProperty({ example: 'общая сумма заказа' })
-  @Prop()
-  totaAmount: number
+  @Prop({ required: true })
+  quantity: number
 
   @ApiProperty({ example: 'id товаров' })
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Product } )
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Product })
   productId: mongoose.Schema.Types.ObjectId
 
 }

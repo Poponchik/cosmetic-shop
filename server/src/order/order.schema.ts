@@ -24,18 +24,15 @@ export class Order {
   // productId: mongoose.Schema.Types.ObjectId
 
   @ApiProperty({ example: 'email' })
-  // @Prop({ required: true })
-  @Prop()
+  @Prop({ required: true })
   email: string
 
   @ApiProperty({ example: 'номер заказа' })
-  // @Prop({ required: true })
-  @Prop()
+  @Prop({ required: true })
   numberPhone: string
 
   @ApiProperty({ example: 'статус', description: 'выполнено' })
-  // @Prop({ required: true })
-  @Prop()
+  @Prop({ required: true })
   status: string
 
   @ApiProperty({ example: 'адрес доставки', description: 'Чистяковская 15' })
@@ -43,9 +40,8 @@ export class Order {
   address: string
 
   @ApiProperty({ example: 'общая сумма заказа' })
-  // @Prop({ required: true })
-  @Prop()
-  totaAmount: number
+  @Prop({ required: true })
+  totalAmount: number
 
   @ApiProperty({ example: 'дата заказа', description: '15.10.2022' })
   @Prop({ type: Date, default: Date.now })

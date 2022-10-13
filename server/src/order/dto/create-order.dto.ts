@@ -38,7 +38,7 @@ export class CreateOrderDto {
 
 
     @ApiProperty({ example: 'общая сумма заказа' })
-    readonly totaAmount: number
+    readonly totalAmount: number
 
 
 }
