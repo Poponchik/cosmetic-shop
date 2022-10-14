@@ -5,8 +5,23 @@ import { IoIosArrowBack } from "react-icons/io";
 import { GoSettings } from "react-icons/go";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import { config } from "./config";
+import dataService from "./ds";
+import { Product } from "./types";
+import { useState, useEffect } from "react";
 
 function Catalog() {
+  const [products, setProducts] = useState<Array<Product>>([]);
+
+  async function getProducts() {
+    const { data } = await dataService.product.getAllProducts();
+    setProducts(data);
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <React.Fragment>
       <div className={styles.container}>
@@ -23,7 +38,7 @@ function Catalog() {
 
               <div className={styles.filter_sort}>
                 <div className={styles.filter_block}>
-                  <GoSettings size={18}/>
+                  <GoSettings size={18} />
                   <p>Filter</p>
                 </div>
                 <div className={styles.dropdown_sort}>
@@ -112,229 +127,37 @@ function Catalog() {
 
                 <div className={styles.products_block}>
                   <div className={styles.products}>
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product1.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product2.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product3.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link to="/product" className={styles.link}>
-                      <div className={styles.product_cart}>
-                        <img
-                          src="./images/product4.png"
-                          className={styles.product_photo}
-                        ></img>
-                        <p className={styles.title_product}>Body Scrub</p>
-                        <div className={styles.description_product}>
-                          <p>Anti-cellulite coffee scrub with red pepper,</p>
-                          <p>300g</p>
-                        </div>
-                        <div className={styles.price_block}>
-                          <p className={styles.price_product}> 150 ₴</p>
-                          <button
-                            className={classNames(
-                              styles.small_button,
-                              styles.button
-                            )}
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                    </Link>
+                    {products.map((product) => {
+                      return (
+                        <Link to="/product" className={styles.link}>
+                          <div className={styles.product_cart}>
+                            <img
+                              src={`${config.serverUrl}/${product.images[0]}`}
+                              className={styles.product_photo}
+                            ></img>
+                            <p className={styles.title_product}>
+                              {product.name}
+                            </p>
+                            <div className={styles.description_product}>
+                              <p>{product.description}</p>
+                            </div>
+                            <div className={styles.price_block}>
+                              <p className={styles.price_product}>
+                                {product.price}
+                              </p>
+                              <button
+                                className={classNames(
+                                  styles.small_button,
+                                  styles.button
+                                )}
+                              >
+                                Add to cart
+                              </button>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
                   </div>
 
                   <button className={styles.show_button}>Show more</button>

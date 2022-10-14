@@ -29,12 +29,6 @@ export class Product {
 
   async createProduct(
     categoryId: string,
-    // name: string,
-    // description: string,
-    // category: string,
-    // tags: Array<string>,
-    // images: Array<File>,
-    // price: string
     data
   ) {
     return authorizedAxios.post(`${this.prefix}/createProduct/${categoryId}`, data);

@@ -51,7 +51,10 @@
     padding: 0;
     color: #333;
     transition: all 0.3s ease-in;
+}
 
+.link:hover{
+    text-decoration: none;
 }
 
 .icon_search_adaptive {

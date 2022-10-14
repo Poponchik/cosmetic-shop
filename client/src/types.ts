@@ -6,3 +6,8 @@ export type Product = {
   images: FileList;
   price: string;
 };
+
+export type Category = {
+  _id: string;
+  name: string;
+}
