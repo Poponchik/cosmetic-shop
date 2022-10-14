@@ -1,20 +1,16 @@
 import * as React from "react";
 import styles from "./styles/addProduct.module.css";
 import { AiFillDelete } from "react-icons/ai";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import dataService from "./ds";
-import { Category } from "./types";
 
-function AddProduct() {
+function EditProduct() {
   const [name, setName] = useState<string>("");
   const [images, setImages] = useState<Array<File>>([]);
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<string>("");
-  const [categoryId, setCategoryId] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
   const [tags, setTags] = useState<Array<string> | undefined>([]);
-  const [categories, setCategories] = useState<Array<Category>>([]);
-
-  const selectRef = useRef<HTMLOptionElement>(null);
 
   function uploadImages(files: FileList) {
     if (files != undefined) {
@@ -26,45 +22,33 @@ function AddProduct() {
     }
   }
 
-  async function getCategories() {
-    const { data } = await dataService.category.getCategories();
-    setCategories(data);
-    console.log(data);
-  }
-
   function deleteImage(deleteImage) {
     const newImages = images.filter((image) => image !== deleteImage);
     setImages(newImages);
   }
 
-  async function createProduct() {
+  async function createProduct(categoryId) {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
     // @ts-ignore
     formData.append("tags", tags as string[]);
     // @ts-ignore
-    images.forEach((image) => formData.append("images", image));
+    images.forEach((image) => formData.append("images", image))
     formData.append("price", price);
 
     const response = await dataService.product.createProduct(
-      categoryId,
+      "63397b5f8986dc2750ee0f1f",
       formData
     );
 
     setName("");
     setDescription("");
     setPrice("");
-    setCategoryId("");
+    setCategory("");
     setImages([]);
     setTags([]);
-    selectRef.current!.selected = true
-    
   }
-
-  useEffect(() => {
-    getCategories();
-  }, []);
 
   console.log({ images });
   return (
@@ -72,7 +56,7 @@ function AddProduct() {
       <div className={styles.inner_container}>
         <div className={styles.add_product_page_div}>
           <div className={styles.add_product_page}>
-            <h1 className={styles.page_title}>Add new product</h1>
+            <h1 className={styles.page_title}>Edit product</h1>
             <div className={styles.add_product_form}>
               <div>
                 <p className={styles.input_title}>Product title:</p>
@@ -126,17 +110,12 @@ function AddProduct() {
                 <select
                   name="user_profile_color_2"
                   className={styles.input}
-                  onChange={(event) => setCategoryId(event.target.value)}
-  
+                  onChange={(event) => console.log(event.target.value)}
                 >
-                  <option ref={selectRef} value="">Select</option>
-                  {categories.map((category) => (
-                    <option
-                      value={category._id}
-                    >
-                      {category.name}
-                    </option>
-                  ))}
+                  <option value="">Select</option>
+                  <option value="Face">Face</option>
+                  <option value="Body">Body</option>
+                  <option value="Hair">Hair</option>
                 </select>
               </div>
               <div>
@@ -153,7 +132,7 @@ function AddProduct() {
               </div>
               <button
                 className={styles.button_submit}
-                onClick={() => createProduct()}
+                onClick={() => createProduct("000")}
               >
                 Submit
               </button>
@@ -165,4 +144,4 @@ function AddProduct() {
   );
 }
 
-export default AddProduct;
+export default EditProduct;
