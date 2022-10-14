@@ -26,7 +26,6 @@ import * as path from 'path'
         }),
         MongooseModule.forRoot(process.env.MONGODB_HOST),
         UsersModule,
-        // AuthModule,
         ProductModule,
         FilesModule,
         CategoryModule,

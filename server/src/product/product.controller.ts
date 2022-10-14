@@ -1,13 +1,15 @@
 import { Body, Controller, Post, Get, Delete, Param, UploadedFiles, UseInterceptors, UseGuards } from '@nestjs/common'
-import { ProductService } from './product.service'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { FilesInterceptor } from '@nestjs/platform-express'
+
+import { ProductService } from './product.service'
 import { Product } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
-import { FilesInterceptor } from '@nestjs/platform-express'
 import { Roles } from '../auth/roles-auth.decorator'
 import { RolesGuard } from '../auth/roles.guard'
-
 import { Role } from '../shared/index'
+
+
 @ApiTags('Продукты')
 @Controller('product')
 export class ProductController {

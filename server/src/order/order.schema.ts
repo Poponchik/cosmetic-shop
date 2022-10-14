@@ -1,9 +1,8 @@
-import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose'
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
 import { User } from '../users/user.schema'
 import { Document } from 'mongoose'
 import { ApiProperty } from '@nestjs/swagger'
-import { Product } from '../product/product.schema'
 import { ProductsInOrder } from './productsInOrder.schema'
 
 export type OrderDocument = Order & Document
@@ -13,15 +12,6 @@ export class Order {
   @ApiProperty({ example: 'id юзера' })
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => User })
   userId: mongoose.Schema.Types.ObjectId
-
-
-  // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Product })
-  // productId: mongoose.Schema.Types.ObjectId
-
-
-  // @ApiProperty({ example: 'id product' })
-  // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Product })
-  // productId: mongoose.Schema.Types.ObjectId
 
   @ApiProperty({ example: 'email' })
   @Prop({ required: true })
