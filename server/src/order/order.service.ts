@@ -15,6 +15,7 @@ import { JwtService } from '@nestjs/jwt'
 
 import { UsersService } from 'src/users/users.service'
 import { CreateUserDto } from '../users/dto/create-user.dto'
+import { ObjectPrice } from 'src/shared'
 
 @Injectable()
 export class OrderService {
@@ -24,35 +25,31 @@ export class OrderService {
         private jwtService: JwtService,
         private userService: UsersService) { }
 
+    async createOrder(orderDto: CreateOrderDto, status, req) {
+        let sum = 0
+        const productIdsFromOrder = orderDto.products.map(product => product.productId)
+        const products = await this.productService.find({ _id: { $in: productIdsFromOrder } })
+        const priceObject: ObjectPrice = {}
 
+        for(const product of products) {
+            priceObject[product._id] = product.price
+        }
 
-
-
-
-
-    async createOrder(dto: CreateOrderDto, status, req) {
-
-
-        let sum: number = 0
-        const productsId = dto.products.map(product => product.productId)
-        const response = await this.productService.find({ _id: { $in: productsId } })
-
-        for (let i = 0; i < response.length; i++) {
-            for (let n = 0; n < dto.products.length; n++) {
-                if (response[i]._id.equals(dto.products[n].productId)) {
-                    sum += +response[i].price * dto.products[n].quantity
-                }
-            }
+        for(const product of orderDto.products) {
+            const objectIdToString = String(product.productId)
+            if(product.quantity < 1 || !objectIdToString) continue
+            sum += priceObject[objectIdToString] * product.quantity
         }
 
         const authHeader = req.headers.authorization
+        let userId
         if (authHeader) {
             const token = authHeader.split(' ')[1]
             const { email } = this.jwtService.verify(token)
-            var { _id } = await this.userService.getUserByEmail(email)
+            userId = (await this.userService.getUserByEmail(email))._id
         }
 
-        const order = await this.orderModel.create({ ...dto, status, totalAmount: sum, userId: _id })
+        const order = await this.orderModel.create({ ...orderDto, status, totalPrice: sum, userId })
         return order
     }
 

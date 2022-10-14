@@ -1,7 +1,9 @@
 
 
 
-
+export interface ObjectPrice {
+    [key: string]: number;
+}
 
 
 

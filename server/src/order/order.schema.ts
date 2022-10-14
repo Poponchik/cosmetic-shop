@@ -41,7 +41,7 @@ export class Order {
 
   @ApiProperty({ example: 'общая сумма заказа' })
   @Prop({ required: true })
-  totalAmount: number
+  totalPrice: number
 
   @ApiProperty({ example: 'дата заказа', description: '15.10.2022' })
   @Prop({ type: Date, default: Date.now })
