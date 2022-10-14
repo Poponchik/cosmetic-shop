@@ -1,13 +1,12 @@
 import { Injectable } from '@nestjs/common'
-import { Product, ProductDocument } from './product.schema'
-import { CreateProductDto } from './dto/create-product.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { FilesService } from '../files/files.service'
 import * as path from 'path'
 import * as fs from 'fs'
 
-// import { Role } from './product.controller'
+import { Product, ProductDocument } from './product.schema'
+import { CreateProductDto } from './dto/create-product.dto'
+import { FilesService } from '../files/files.service'
 
 
 

@@ -1,9 +1,9 @@
-import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose'
+import { Prop, Schema } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
-import { User } from '../users/user.schema'
-import { Document } from 'mongoose'
 import { ApiProperty } from '@nestjs/swagger'
 import { Product } from '../product/product.schema'
+
+
 
 export type ProductsInOrderDocument = ProductsInOrder & Document
 

@@ -1,15 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import * as mongoose from 'mongoose'
 
-// export interface IProducts {
-//     [products: string]: 
-//         {
-//             productId: mongoose.Schema.Types.ObjectId
-//             quantity: number
-//     },
-    
-// }
-
 
 export class CreateOrderDto {
     @ApiProperty({ example: 'массив id товаров и количество' })
@@ -17,9 +8,6 @@ export class CreateOrderDto {
 
     @ApiProperty({ example: 'id юзера' })
     readonly userId: mongoose.Schema.Types.ObjectId
-    
-    // @ApiProperty({ example: 'id product' })
-    // readonly productId: mongoose.Schema.Types.ObjectId
     
     @ApiProperty({ example: 'номер заказа' })
     readonly numberPhone: string
@@ -38,7 +26,7 @@ export class CreateOrderDto {
 
 
     @ApiProperty({ example: 'общая сумма заказа' })
-    readonly totalAmount: number
+    readonly totalPrice: number
 
 
 }
@@ -50,6 +38,4 @@ export class CreateProductsInOrderDto {
     @ApiProperty({ example: 'id product' })
     readonly productId: mongoose.Schema.Types.ObjectId
 }
-
-
 

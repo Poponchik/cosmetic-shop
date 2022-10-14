@@ -1,13 +1,14 @@
 import { Body, Controller, Post, Get, Delete, Param, UseGuards } from '@nestjs/common'
-import { CategoryService } from './category.service'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+
+import { CategoryService } from './category.service'
 import { Category } from './category.schema'
 import { CreateCategoryDto } from './dto/create-category.dto'
-
 import { Roles } from '../auth/roles-auth.decorator'
 import { RolesGuard } from '../auth/roles.guard'
-
 import { Role } from '../shared/index'
+
+
 @ApiTags('Категории')
 @Controller('category')
 export class CategoryController {

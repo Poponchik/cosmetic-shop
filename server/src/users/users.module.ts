@@ -1,7 +1,8 @@
 import { forwardRef, Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+
 import { UsersController } from './users.controller'
 import { UsersService } from './users.service'
-import { MongooseModule } from '@nestjs/mongoose'
 import { User, UserSchema } from './user.schema'
 import { AuthModule } from '../auth/auth.module'
 
@@ -24,11 +25,3 @@ export class UsersModule { }
 
 
 
-
-
-
-
-
-
-
-  // MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema }]),

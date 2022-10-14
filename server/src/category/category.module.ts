@@ -1,8 +1,9 @@
-import { forwardRef, Module } from '@nestjs/common'
+import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
+
 import { CategoryController } from './category.controller'
 import { CategoryService } from './category.service'
 import { Category, CategorySchema } from '../category/category.schema'
-import { MongooseModule } from '@nestjs/mongoose'
 import { AuthModule } from '../auth/auth.module'
 
 
@@ -19,15 +20,5 @@ import { AuthModule } from '../auth/auth.module'
   exports: [CategoryService]
 })
 export class CategoryModule { }
-
-
-
-
-
-
-
-
-
-
 
 
