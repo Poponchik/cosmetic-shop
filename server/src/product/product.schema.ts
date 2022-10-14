@@ -9,10 +9,14 @@ export type ProductDocument = Product & Document
 
 @Schema()
 export class Product {
-  @ApiProperty({ example: 'id юзера' })
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => User })
-  userId: mongoose.Schema.Types.ObjectId
+  // @ApiProperty({ example: 'id юзера' })
+  // @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => User })
+  // userId: mongoose.Schema.Types.ObjectId
 
+  @ApiProperty({ example: 'категория товара', description: 'крема' })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Category })
+  categoryId: Category
+  
   @ApiProperty({ example: 'название товара', description: 'крем' })
   @Prop({ required: true })
   name: string
@@ -21,9 +25,6 @@ export class Product {
   @Prop({ required: true })
   description: string
 
-  @ApiProperty({ example: 'категория товара', description: 'крема' })
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: () => Category })
-  category: Category
 
   @ApiProperty({ example: 'тег', description: '...' })
   @Prop([String])
@@ -32,6 +33,10 @@ export class Product {
   @ApiProperty({ example: 'фотографии товара' })
   @Prop([String])
   images: string[]
+  
+  @ApiProperty({ example: 'цена товара' })
+  @Prop({ required: true })
+  price: number
 
 }
 

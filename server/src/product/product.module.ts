@@ -25,5 +25,6 @@ import { AuthModule } from '../auth/auth.module'
     FilesModule,
     AuthModule
   ],
+  exports: [ProductService]
 })
 export class ProductModule {}
