@@ -149,7 +149,7 @@
 
 .product_cart {
     display: inline-block;
-    padding: 16px 24px;
+    padding: 24px;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
     transition: all 0.3s ease-in;
@@ -185,12 +185,18 @@
     justify-content: space-between;
 }
 
-.price_product {
+.price_div{
+    display: flex;
+    gap: 4px;
+}
+
+.price_product, .gryvna_symbol {
     color: #FB9B5A;
     font-weight: 700;
     font-size: 14px;
-
 }
+
+
 
 .small_button {
     background: #FB9B5A;
@@ -206,7 +212,6 @@
 .product_cart:hover .small_button {
     opacity: 1;
     transition: 0.5s;
-
 }
 
 .product_cart:hover {
@@ -215,7 +220,6 @@
 }
 
 .products_block {
-    /* margin-left: 40px; */
     width: 75%;
     gap: 16px;
 }

@@ -128,7 +128,12 @@ function Main() {
                         <p>{product.description}</p>
                       </div>
                       <div className={styles.price_block}>
-                        <p className={styles.price_product}>{product.price}</p>
+                        <div className={styles.price_div}>
+                          <p className={styles.price_product}>
+                            {product.price}
+                          </p>
+                          <p className={styles.gryvna_symbol}>₴</p>
+                        </div>
                         <button
                           className={classNames(
                             styles.small_button,
@@ -142,7 +147,6 @@ function Main() {
                   </Link>
                 );
               })}
-
             </div>
             <IoIosArrowForward className={styles.arrow_right} size={24} />
           </div>

@@ -59,12 +59,16 @@
     justify-content: space-between;
 }
 
-.price_product {
+.price_div{
+    display: flex;
+    gap: 4px;
+}
+
+.price_product, .gryvna_symbol {
     color: #FB9B5A;
     font-weight: 700;
     font-size: 14px;
 }
-
 .small_button {
     background: #FB9B5A;
     border: none;
@@ -200,7 +204,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 12px;
-
 }
 
 .icon_delete{
@@ -218,6 +221,3 @@
     margin-left: 15px;
 }
 
-.category_name{
-
-}
