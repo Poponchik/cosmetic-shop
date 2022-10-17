@@ -1,12 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import * as mongoose from 'mongoose'
-import { User } from '../users/user.schema'
-import { Document } from 'mongoose'
 import { ApiProperty } from '@nestjs/swagger'
+
+import { User } from '../users/user.schema'
 import { ProductsInOrder } from './productsInOrder.schema'
 
-export type OrderDocument = Order & Document
 
+
+
+export type OrderDocument = Order & Document
 @Schema()
 export class Order {
   @ApiProperty({ example: 'id юзера' })
