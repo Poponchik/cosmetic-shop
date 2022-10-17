@@ -23,7 +23,6 @@ function Admin() {
   async function deleteCategory(categoryId) {
     await dataService.category.deleteCategory(categoryId);
     getCategories();
-
   }
 
   async function getCategories() {
@@ -152,7 +151,12 @@ function Admin() {
                         <p>{product.description}</p>
                       </div>
                       <div className={styles.price_block}>
-                        <p className={styles.price_product}>{product.price}</p>
+                        <div className={styles.price_div}>
+                          <p className={styles.price_product}>
+                            {product.price}
+                          </p>
+                          <p className={styles.gryvna_symbol}>₴</p>
+                        </div>
                         <div className={styles.icons}>
                           <Link to="/editProduct" className={styles.link}>
                             <AiFillEdit size={26} />

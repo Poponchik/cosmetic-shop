@@ -264,11 +264,15 @@ img {
     height: 36px;
 }
 
-.price_product {
+.price_div{
+    display: flex;
+    gap: 4px;
+}
+
+.price_product, .gryvna_symbol {
     color: #FB9B5A;
     font-weight: 700;
     font-size: 14px;
-
 }
 
 .small_button {

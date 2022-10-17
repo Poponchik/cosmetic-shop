@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./styles/header.module.css";
 import { FaUser } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogIn } from "react-icons/fi";
 import { FaShoppingCart } from "react-icons/fa";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
@@ -70,30 +70,24 @@ function Header() {
               </Link>
 
               {localStorage.getItem("token") ? (
-                <Link to="/auth/login" className={styles.link}>
-                  <FiLogOut
-                    size={22}
-                    onClick={logout}
-                    className={styles.icon}
-                  />
-                </Link>
-              ) : (
-                <></>
-              )}
+                <div className={styles.dropdown}>
+                  <FaUser size={22} className={styles.icon} />
+                  <div className={styles.dropdown_content}>
+                    <p> My orders</p>
+                    <Link to="/admin" className={styles.link}>
+                      <p>Admin</p>
+                    </Link>
 
-              <div className={styles.dropdown}>
-                <FaUser size={22} className={styles.icon} />
-                <div className={styles.dropdown_content}>
-                  <p> My orders</p>
-                  <Link to="/admin" className={styles.link}>
-                    <p>Admin</p>
-                  </Link>
-
-                  <Link to="/auth/login" className={styles.link}>
-                    <p>Log out</p>
-                  </Link>
+                    <Link to="/auth/login" className={styles.link}>
+                      <p onClick={logout}>Log out</p>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <Link to="/auth/login" className={styles.link}>
+                  <FiLogIn size={22} className={styles.icon} />
+                </Link>
+              )}
 
               <Link to="/cart" className={styles.link}>
                 <FaShoppingCart size={22} className={styles.icon_cart} />
