@@ -15,6 +15,7 @@ const product_schema_1 = require("../product/product.schema");
 const files_module_1 = require("../files/files.module");
 const users_module_1 = require("../users/users.module");
 const auth_module_1 = require("../auth/auth.module");
+const tag_module_1 = require("../tag/tag.module");
 let ProductModule = class ProductModule {
 };
 ProductModule = __decorate([
@@ -27,7 +28,8 @@ ProductModule = __decorate([
             ]),
             (0, common_1.forwardRef)(() => users_module_1.UsersModule),
             files_module_1.FilesModule,
-            auth_module_1.AuthModule
+            auth_module_1.AuthModule,
+            tag_module_1.TagModule
         ],
         exports: [product_service_1.ProductService]
     })

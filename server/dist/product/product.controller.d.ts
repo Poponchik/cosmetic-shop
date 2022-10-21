@@ -16,6 +16,9 @@ export declare class ProductController {
     getProductsСategory(categoryId: string): Promise<(Product & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;
     })[]>;
+    getProductsTag(tagId: string): Promise<(Product & import("mongoose").Document<any, any, any> & {
+        _id: import("mongoose").Types.ObjectId;
+    })[]>;
     deleteProduct(id: string): Promise<string>;
     changeProduct(ProductDto: CreateProductDto, id: string, images: any): Promise<Product & import("mongoose").Document<any, any, any> & {
         _id: import("mongoose").Types.ObjectId;

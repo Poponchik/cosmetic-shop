@@ -38,6 +38,9 @@ let ProductController = class ProductController {
     getProductsСategory(categoryId) {
         return this.productService.getProductsСategory(categoryId);
     }
+    getProductsTag(tagId) {
+        return this.productService.getProductsTag(tagId);
+    }
     deleteProduct(id) {
         return this.productService.deleteProduct(id);
     }
@@ -77,7 +80,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProductController.prototype, "getOneProductsId", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'Получить продукт по категории id' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Получить продукт по id категории' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: [product_schema_1.Product] }),
     (0, common_1.Get)('/productsCategory/:categoryId'),
     __param(0, (0, common_1.Param)('categoryId')),
@@ -85,6 +88,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductController.prototype, "getProducts\u0421ategory", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: 'Получить продукт по id тега' }),
+    (0, swagger_1.ApiResponse)({ status: 200, type: [product_schema_1.Product] }),
+    (0, common_1.Get)('/productsTag/:tagId'),
+    __param(0, (0, common_1.Param)('tagId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ProductController.prototype, "getProductsTag", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Удалить товар по id' }),
     (0, swagger_1.ApiResponse)({ status: 200, type: product_schema_1.Product }),

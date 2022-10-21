@@ -18,6 +18,7 @@ const product_module_1 = require("./product/product.module");
 const files_module_1 = require("./files/files.module");
 const category_module_1 = require("./category/category.module");
 const order_module_1 = require("./order/order.module");
+const tag_module_1 = require("./tag/tag.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -37,7 +38,8 @@ AppModule = __decorate([
             product_module_1.ProductModule,
             files_module_1.FilesModule,
             category_module_1.CategoryModule,
-            order_module_1.OrderModule
+            order_module_1.OrderModule,
+            tag_module_1.TagModule
         ]
     })
 ], AppModule);

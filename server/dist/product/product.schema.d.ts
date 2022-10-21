@@ -1,12 +1,13 @@
 import { Document } from 'mongoose';
 import { Category } from '../category/category.schema';
+import { Tag } from '../tag/tag.schema';
 import * as mongoose from 'mongoose';
 export declare type ProductDocument = Product & Document;
 export declare class Product {
     categoryId: Category;
+    tagsId: Tag[];
     name: string;
     description: string;
-    tags: string[];
     images: string[];
     price: number;
 }

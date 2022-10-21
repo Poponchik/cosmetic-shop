@@ -13,6 +13,7 @@ exports.ProductSchema = exports.Product = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
 const swagger_1 = require("@nestjs/swagger");
 const category_schema_1 = require("../category/category.schema");
+const tag_schema_1 = require("../tag/tag.schema");
 const mongoose = require("mongoose");
 let Product = class Product {
 };
@@ -21,6 +22,11 @@ __decorate([
     (0, mongoose_1.Prop)({ type: mongoose.Schema.Types.ObjectId, ref: () => category_schema_1.Category }),
     __metadata("design:type", category_schema_1.Category)
 ], Product.prototype, "categoryId", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'массив id тегов', description: '[1213б 1233]' }),
+    (0, mongoose_1.Prop)({ type: [mongoose.Schema.Types.ObjectId], ref: () => tag_schema_1.Tag }),
+    __metadata("design:type", Array)
+], Product.prototype, "tagsId", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'название товара', description: 'крем' }),
     (0, mongoose_1.Prop)({ required: true }),
@@ -31,11 +37,6 @@ __decorate([
     (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Product.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 'тег', description: '...' }),
-    (0, mongoose_1.Prop)([String]),
-    __metadata("design:type", Array)
-], Product.prototype, "tags", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'фотографии товара' }),
     (0, mongoose_1.Prop)([String]),

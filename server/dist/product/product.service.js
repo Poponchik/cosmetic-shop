@@ -20,10 +20,12 @@ const path = require("path");
 const fs = require("fs");
 const product_schema_1 = require("./product.schema");
 const files_service_1 = require("../files/files.service");
+const tag_service_1 = require("../tag/tag.service");
 let ProductService = class ProductService {
-    constructor(productModel, fileService) {
+    constructor(productModel, fileService, tagService) {
         this.productModel = productModel;
         this.fileService = fileService;
+        this.tagService = tagService;
     }
     async createProducts(dto, images, categoryId) {
         const fileName = await this.fileService.createFile(images);
@@ -39,7 +41,12 @@ let ProductService = class ProductService {
         return product;
     }
     async getProductsСategory(categoryId) {
-        const products = await this.productModel.find({ category: categoryId });
+        const products = await this.productModel.find({ categoryId });
+        return products;
+    }
+    async getProductsTag(tagId) {
+        console.log(tagId);
+        const products = await this.productModel.find({ tagsId: tagId });
         return products;
     }
     async deleteProduct(_id) {
@@ -64,7 +71,8 @@ ProductService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)(product_schema_1.Product.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        files_service_1.FilesService])
+        files_service_1.FilesService,
+        tag_service_1.TagService])
 ], ProductService);
 exports.ProductService = ProductService;
 //# sourceMappingURL=product.service.js.map

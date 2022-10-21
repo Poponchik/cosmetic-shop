@@ -19,6 +19,10 @@ __decorate([
     __metadata("design:type", mongoose.Schema.Types.ObjectId)
 ], CreateProductDto.prototype, "categoryId", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ example: 'категория товара', description: 'крема' }),
+    __metadata("design:type", Array)
+], CreateProductDto.prototype, "tagsId", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ example: 'название товара', description: 'крем' }),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "name", void 0);
@@ -26,10 +30,6 @@ __decorate([
     (0, swagger_1.ApiProperty)({ example: 'описание товара', description: 'от морщин' }),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "description", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ example: 'тег', description: '...' }),
-    __metadata("design:type", Array)
-], CreateProductDto.prototype, "tags", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ example: 'фото товара' }),
     __metadata("design:type", Array)
