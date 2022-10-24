@@ -1,5 +1,5 @@
 
-import { Body, Controller, Post, Get, Param, Req } from '@nestjs/common'
+import { Body, Controller, Post, Get, Param, Req, UseGuards } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Request } from 'express'
 
@@ -7,6 +7,7 @@ import { CreateOrderDto } from './dto/create-order.dto'
 import { OrderService } from '../order/order.service'
 import { Order } from './order.schema'
 import { Status } from '../shared/index'
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard'
 
 
 @ApiTags('Заказы')
@@ -27,9 +28,11 @@ export class OrderController {
 
     @ApiOperation({ summary: 'Получить ордера по userId' })
     @ApiResponse({ status: 200, type: Order })
-    @Get('/order/:id')
-    getOrderById(@Param('id') id: string) {
-        return this.orderService.getOrderById(id)
+    @UseGuards(JwtAuthGuard)
+    @Get('/orders')
+    getOrderById(@Req() req: any) {
+        const userId = req.user._id
+        return this.orderService.getOrderById(userId)
     }
 
 }
