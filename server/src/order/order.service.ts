@@ -67,7 +67,8 @@ export class OrderService {
 
 
     async getOrderById(userId: string) {
-        const orders = await this.orderModel.find({ userId })
+        // @ts-ignore
+        const orders = await this.orderModel.find({ userId }).cache({key: userId})
         return orders
     }
 }
