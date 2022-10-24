@@ -20,8 +20,14 @@ function Cart() {
 
   async function createOrder() {
     if( !phoneNumber || !address || !email) return
+    const mappedCart = cart.map(element => {
+      return {
+        quantity: element.quantity,
+        productId: element.item._id
+      }
+    })
     await dataService.order.createOrder(
-      cart,
+      mappedCart,
       phoneNumber,
       address,
       email,

@@ -46,7 +46,7 @@ let OrderService = class OrderService {
         const authHeader = req.headers.authorization;
         let userId;
         let toMailer = {
-            to: 'mail',
+            to: orderDto.email,
             subject: 'Ваш заказ в магазине COSMETIC-SHOP',
             from: 'grxo48et@ukr.net',
             html: '<h1>order</h1>'
@@ -54,7 +54,6 @@ let OrderService = class OrderService {
         if (authHeader) {
             const token = authHeader.split(' ')[1];
             const { email } = this.jwtService.verify(token);
-            toMailer.to = email;
             userId = (await this.userService.getUserByEmail(email))._id;
         }
         const order = await this.orderModel.create(Object.assign(Object.assign({}, orderDto), { status, totalPrice: sum, userId }));
@@ -63,7 +62,6 @@ let OrderService = class OrderService {
         Статус заказа: ${order.status}<br>
         Сумма заказа: ${order.totalPrice}грн.
         </h4>`;
-        await this.mailerService.send(toMailer);
         return order;
     }
     async getOrderById(userId) {
