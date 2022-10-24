@@ -140,7 +140,7 @@ function Admin() {
             <div className={styles.products}>
               {products.map((product) => {
                 return (
-                  <Link to="/product" className={styles.link}>
+                  <Link to={"/p/" + product._id} className={styles.link}>
                     <div className={styles.product_cart}>
                       <img
                         src={`${config.serverUrl}/${product.images[0]}`}

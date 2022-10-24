@@ -7,19 +7,33 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import dataService from "./ds";
+import { useState, useEffect } from "react";
+import { Product, Category } from "./types";
 
 function Header() {
+  const [categories, setCategories] = useState<Array<Category>>([]);
+
   function logout() {
     localStorage.removeItem("token");
     window.location.href = "/auth/login";
   }
+
+  async function getCategories() {
+    const { data } = await dataService.category.getCategories();
+    setCategories(data);
+  }
+
+  useEffect(()=>{
+    getCategories()
+  }, [])
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.header_inner}>
           <Link to="/">
-            <img className={styles.logo} src="./images/logo.png" />
+            <img className={styles.logo} src="/images/logo.png" />
           </Link>
           <div className={styles.nav_div}>
             <nav className={styles.navigation}>
@@ -32,13 +46,24 @@ function Header() {
                   </li>
                 </Link>
 
-                <Link to="/catalog" className={styles.link}>
+                <div className={styles.dropdown}>
                   <li className={styles.li_header}>
-                    <a href="#" className={styles.a_header}>
+                   
                       Catalog
-                    </a>
+                
                   </li>
-                </Link>
+                  <div className={styles.dropdown_content}>
+                    <div>
+                      {categories.map((category) => {
+                        return (
+                          <Link to={"/catalog/" + category.name} className={styles.link}>
+                            <p>{category.name}</p>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
 
                 <li className={styles.li_header}>
                   <a href="#" className={styles.a_header}>
@@ -73,7 +98,10 @@ function Header() {
                 <div className={styles.dropdown}>
                   <FaUser size={22} className={styles.icon} />
                   <div className={styles.dropdown_content}>
-                    <p> My orders</p>
+                    <Link to="/" className={styles.link}>
+                      <p> My orders</p>
+                    </Link>
+
                     <Link to="/admin" className={styles.link}>
                       <p>Admin</p>
                     </Link>

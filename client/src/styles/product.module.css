@@ -47,6 +47,10 @@
 
 .main_photo_product {
     width: 100%;
+    margin-bottom: 12px;
+    width: 440px;
+    height: 370px;
+    border-radius: 8px;
 }
 
 .title_product_card {
@@ -56,8 +60,15 @@
 
 .product_photos_miniature {
     display: flex;
+    width: 140px;
+    height: 110px;
     width: 100%;
     justify-content: space-between;
+    border-radius: 8px;
+}
+
+.photo_product_mini{
+    
 }
 
 .photo_product {
