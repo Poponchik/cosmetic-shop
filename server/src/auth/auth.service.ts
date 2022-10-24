@@ -4,7 +4,7 @@ import * as bcrypt from 'bcryptjs'
 
 import { UsersService } from '../users/users.service'
 import { CreateUserDto } from '../users/dto/create-user.dto'
-import { User } from '../users/user.schema'
+import { User, UserDocument } from '../users/user.schema'
 
 
 
@@ -33,8 +33,9 @@ export class AuthService {
     }
 
 
-    private async generateToken(user: User) {
+    private async generateToken(user: UserDocument) {
         const payload = {
+            _id: user._id,
             email: user.email,
             role: user.role
         }

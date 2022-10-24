@@ -24,16 +24,19 @@ export class ProductService {
 
 
     async getAllProducts() {
-        const products = await this.productModel.find()
+        //@ts-ignore
+        const products = await this.productModel.find().cache()
         return products
     }
     async getOneProductsId(_id: string) {
-        const product = await this.productModel.findById({ _id })
+        //@ts-ignore
+        const product = await this.productModel.findById({ _id }).cache()
         return product
     }
 
     async getProductsСategory(categoryId: string) {
-        const products = await this.productModel.find({ category: categoryId })
+        // @ts-ignore
+        const products = await this.productModel.find({ category: categoryId }).cache()
         return products
     }
 
