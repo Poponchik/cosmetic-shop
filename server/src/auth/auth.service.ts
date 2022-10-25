@@ -4,7 +4,7 @@ import * as bcrypt from 'bcryptjs'
 
 import { UsersService } from '../users/users.service'
 import { CreateUserDto } from '../users/dto/create-user.dto'
-import { User } from '../users/user.schema'
+import { User, UserDocument } from '../users/user.schema'
 
 
 
@@ -33,8 +33,9 @@ export class AuthService {
     }
 
 
-    private async generateToken(user: User) {
+    private async generateToken(user: UserDocument) {
         const payload = {
+            _id: user._id,
             email: user.email,
             role: user.role
         }
@@ -46,10 +47,12 @@ export class AuthService {
 
     private async validateUser(userDto: CreateUserDto) {
         const user = await this.userService.getUserByEmail(userDto.email)
-        const passwordEquals = await bcrypt.compare(userDto.password, user.password)
+        if(!user) {
+            throw new UnauthorizedException({ message: 'Некорретный емейл или пароль' })
+        }
+        const passwordEquals = await bcrypt.compare(userDto.password, user?.password)
         if (user && passwordEquals) {
             return user
         }
-        throw new UnauthorizedException({ message: 'Некорретный емейл или пароль' })
     }
 }
