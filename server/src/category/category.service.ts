@@ -4,6 +4,7 @@ import { Model } from 'mongoose'
 
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { Category, CategoryDocument } from './category.schema'
+import { cache, clearHash } from 'src/services/cache'
 
 
 @Injectable()
@@ -13,22 +14,24 @@ export class CategoryService {
 
 
     async createCategory(CategoryDto: CreateCategoryDto) {
-        const category = await this.categoryModel.create({ name: CategoryDto.name })
+        const category = await cache(this.categoryModel.create({ name: CategoryDto.name }))
         return category
     }
 
     async getAllCategory() {
-        const category = await this.categoryModel.find()
+        const category = await cache(this.categoryModel.find())
         return category
     }
 
     async deleteCategory(_id: string) {
         await this.categoryModel.deleteOne({ _id })
+        await clearHash('', false)
         return 'Remove ' + _id
     }
 
     async changeCategory(dto: CreateCategoryDto, _id: string) {
         const category = await this.categoryModel.findOneAndUpdate({ _id }, { '$set': dto }, { new: true })
+        clearHash('', false)
         return category
     }
 
