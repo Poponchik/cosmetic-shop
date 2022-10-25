@@ -35,11 +35,16 @@
     padding: 0;
     display: flex;
     gap: 24px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+
 }
 
 .li_header .a_header {
     list-style-type: none;
     text-decoration: none;
+    cursor: pointer;
     color: #333;
     font-size: 12px;
     font-weight: 500;
@@ -51,6 +56,10 @@
     padding: 0;
     color: #333;
     transition: all 0.3s ease-in;
+    cursor: pointer;
+    font-weight: 400;
+
+
 }
 
 .link:hover{
