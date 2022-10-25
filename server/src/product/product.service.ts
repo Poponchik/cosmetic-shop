@@ -8,6 +8,7 @@ import { Product, ProductDocument } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
 import { FilesService } from '../files/files.service'
 import { cache, clearHash } from 'src/services/cache'
+import { TagService } from '../tag/tag.service'
 
 
 
@@ -15,7 +16,9 @@ import { cache, clearHash } from 'src/services/cache'
 export class ProductService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
-        private fileService: FilesService) { }
+        private fileService: FilesService,
+        private tagService: TagService
+    ) { }
 
     async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
         const fileName = await this.fileService.createFile(images)
@@ -33,9 +36,12 @@ export class ProductService {
         const product = await cache(this.productModel.findById({ _id }))
         return product
     }
-
     async getProductsСategory(categoryId: string) {
         const products = await cache(this.productModel.find({ category: categoryId }))
+        return products
+    }
+    async getProductsTag(tagId: string) {
+        const products = await this.productModel.find({ tagsId: tagId })
         return products
     }
 

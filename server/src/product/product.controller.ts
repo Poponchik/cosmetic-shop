@@ -44,11 +44,17 @@ export class ProductController {
     getOneProductsId(@Param('id') id: string) {
         return this.productService.getOneProductsId(id)
     }
-    @ApiOperation({ summary: 'Получить продукт по категории id' })
+    @ApiOperation({ summary: 'Получить продукт по id категории' })
     @ApiResponse({ status: 200, type: [Product] })
     @Get('/productsCategory/:categoryId')
     getProductsСategory(@Param('categoryId') categoryId: string) {
         return this.productService.getProductsСategory(categoryId)
+    }
+    @ApiOperation({ summary: 'Получить продукт по id тега' })
+    @ApiResponse({ status: 200, type: [Product] })
+    @Get('/productsTag/:tagId')
+    getProductsTag(@Param('tagId') tagId: string) {
+        return this.productService.getProductsTag(tagId)
     }
 
     @ApiOperation({ summary: 'Удалить товар по id' })

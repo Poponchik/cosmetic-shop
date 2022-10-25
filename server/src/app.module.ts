@@ -10,6 +10,7 @@ import { ProductModule } from './product/product.module'
 import { FilesModule } from './files/files.module'
 import { CategoryModule } from './category/category.module'
 import { OrderModule } from './order/order.module'
+import { TagModule } from './tag/tag.module'
 
 
 
@@ -29,7 +30,8 @@ import { OrderModule } from './order/order.module'
         ProductModule,
         FilesModule,
         CategoryModule,
-        OrderModule
+        OrderModule,
+        TagModule
     ]
 })
 export class AppModule { }
