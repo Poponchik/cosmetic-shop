@@ -9,6 +9,7 @@ import { Product, ProductDocument } from '../product/product.schema'
 import { UsersService } from '../users/users.service'
 import { MailerService } from '../mailer/mailer.service'
 import { ObjectPrice } from '../shared'
+import { cache, clearHash } from 'src/services/cache'
 
 
 @Injectable()
@@ -51,6 +52,7 @@ export class OrderService {
             const token = authHeader.split(' ')[1]
             const { email } = this.jwtService.verify(token)
             userId = (await this.userService.getUserByEmail(email))._id
+            await clearHash(userId)
         }
 
         const order = await this.orderModel.create({ ...orderDto, status, totalPrice: sum, userId })
@@ -66,7 +68,7 @@ export class OrderService {
 
 
     async getOrderById(userId: string) {
-        const orders = await this.orderModel.find({ userId })
+        const orders = await cache(this.orderModel.find({ userId }), userId)
         return orders
     }
 }
