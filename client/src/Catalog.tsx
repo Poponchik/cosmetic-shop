@@ -48,17 +48,12 @@ function Catalog() {
     const catalogCategory = await data.find(
       (category) => category.name === categoryName
     );
-    // console.log(catalogCategory._id)
-    // // setCategoryId(catalogCategory._id)
-    // console.log(catalogCategory)
-    getProductsByCategory(catalogCategory._id);
 
-    
+    getProductsByCategory(catalogCategory._id);
   }
 
   useEffect(() => {
     getCategories();
-    // getProductsByCategory(categoryId);
   }, [categoryName]);
 
   return (
