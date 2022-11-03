@@ -15,9 +15,9 @@ import { flash } from "react-universal-flash";
 
 function Catalog() {
   const [products, setProducts] = useState<Array<Product>>([]);
-  const [categories, setCategories] = useState<Array<Category>>([]);
+  const [categoryId, setCategoryId] = useState<string>('');
 
-  let categoryName = useParams();
+  let {categoryName} = useParams();
 
   function sendToCart(product) {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -44,10 +44,9 @@ function Catalog() {
 
   async function getCategories() {
     const { data } = await dataService.category.getCategories();
-    setCategories(data);
 
-    const catalogCategory = data.find(
-      (category) => category.name === categoryName.categoryName
+    const catalogCategory = await data.find(
+      (category) => category.name === categoryName
     );
 
     getProductsByCategory(catalogCategory._id);
@@ -55,7 +54,7 @@ function Catalog() {
 
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [categoryName]);
 
   return (
     <React.Fragment>
@@ -70,7 +69,7 @@ function Catalog() {
               </div>
 
               <div className={styles.category_catalog}>
-                {categoryName.categoryName}
+                {categoryName}
               </div>
 
               <div className={styles.filter_sort}>
@@ -166,7 +165,7 @@ function Catalog() {
                   <div className={styles.products}>
                     {products.map((product) => {
                       return (
-                        <div className={styles.product_cart}>
+                        <div className={styles.product_cart} key={product._id}>
                           <Link
                             to={"/p/" + product._id}
                             className={styles.link}

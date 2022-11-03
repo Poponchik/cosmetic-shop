@@ -37,7 +37,7 @@ export class ProductService {
         return product
     }
     async getProductsСategory(categoryId: string) {
-        const products = await cache(this.productModel.find({ category: categoryId }))
+        const products = await cache(this.productModel.find({ categoryId }))
         return products
     }
     async getProductsTag(tagId: string) {
