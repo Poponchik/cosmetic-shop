@@ -37,7 +37,7 @@ export class CategoryController {
     @ApiResponse({ status: 200, type: Category })
     @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
-    @Delete('/deleteCategory/:id')
+    @Get('/deleteCategory/:id')
     deleteCategory(@Param('id') id: string) {
         return this.categoryService.deleteCategory(id)
     }

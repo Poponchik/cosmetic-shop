@@ -9,6 +9,9 @@ export class CreateProductDto {
     @ApiProperty({ example: 'категория товара', description: 'крема' })
     readonly categoryId: mongoose.Schema.Types.ObjectId
 
+    // @ApiProperty({ example: 'категория товара', description: 'крема' })
+    // readonly _id: mongoose.Schema.Types.ObjectId
+
     @ApiProperty({ example: 'название товара', description: 'крем' })
     readonly name: string
 
