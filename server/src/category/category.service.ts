@@ -6,7 +6,7 @@ import * as fs from 'fs'
 
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { Category, CategoryDocument } from './category.schema'
-import { Product, ProductDocument } from '../product/product.schema'
+import { cache, clearHash } from 'src/services/cache'
 
 
 @Injectable()
@@ -18,31 +18,24 @@ export class CategoryService {
 
 
     async createCategory(CategoryDto: CreateCategoryDto) {
-        const category = await this.categoryModel.create({ name: CategoryDto.name, description: CategoryDto.description })
+        const category = await cache(this.categoryModel.create({ name: CategoryDto.name }))
         return category
     }
 
     async getAllCategory() {
-        const category = await this.categoryModel.find()
+        const category = await cache(this.categoryModel.find())
         return category
     }
 
-    async deleteCategory(categoryId: string) {
-        let images = []
-        const products = await this.productModel.find({ categoryId })
-        for (let i = 0; i < products.length; i++) {
-            images = [...images, ...products[i].images]
-        }
-        images.forEach((image) => {
-            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
-        })
-        await this.categoryModel.deleteOne({ _id: categoryId })
-        await this.productModel.deleteMany({ categoryId })
-        return 'Remove ' + categoryId
+    async deleteCategory(_id: string) {
+        await this.categoryModel.deleteOne({ _id })
+        await clearHash('', false)
+        return 'Remove ' + _id
     }
 
     async changeCategory(dto: CreateCategoryDto, _id: string) {
         const category = await this.categoryModel.findOneAndUpdate({ _id }, { '$set': dto }, { new: true })
+        clearHash('', false)
         return category
     }
 

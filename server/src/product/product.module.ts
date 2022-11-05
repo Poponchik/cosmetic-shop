@@ -4,9 +4,11 @@ import { MongooseModule } from '@nestjs/mongoose'
 import { ProductService } from './product.service'
 import { ProductController } from './product.controller'
 import { Product, ProductSchema } from '../product/product.schema'
+
 import { FilesModule } from '../files/files.module'
 import { UsersModule } from '../users/users.module'
 import { AuthModule } from '../auth/auth.module'
+import { TagModule } from '../tag/tag.module'
 
 
 
@@ -24,7 +26,8 @@ import { AuthModule } from '../auth/auth.module'
     ]),
     forwardRef(() => UsersModule),
     FilesModule,
-    AuthModule
+    AuthModule,
+    TagModule
   ],
   exports: [ProductService]
 })

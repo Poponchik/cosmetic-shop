@@ -9,6 +9,7 @@ import { Product, ProductDocument } from '../product/product.schema'
 import { UsersService } from '../users/users.service'
 import { MailerService } from '../mailer/mailer.service'
 import { ObjectPrice } from '../shared'
+import { cache, clearHash } from 'src/services/cache'
 
 
 @Injectable()
@@ -41,7 +42,7 @@ export class OrderService {
         const authHeader = req.headers.authorization
         let userId
         let toMailer = {
-            to: 'mail',
+            to: orderDto.email,
             subject: 'Ваш заказ в магазине COSMETIC-SHOP',
             from: 'grxo48et@ukr.net',
             html: '<h1>order</h1>'
@@ -50,8 +51,8 @@ export class OrderService {
         if (authHeader) {
             const token = authHeader.split(' ')[1]
             const { email } = this.jwtService.verify(token)
-            toMailer.to = email
             userId = (await this.userService.getUserByEmail(email))._id
+            await clearHash(userId)
         }
 
         const order = await this.orderModel.create({ ...orderDto, status, totalPrice: sum, userId })
@@ -60,15 +61,14 @@ export class OrderService {
         Статус заказа: ${order.status}<br>
         Сумма заказа: ${order.totalPrice}грн.
         </h4>`
-        await this.mailerService.send(toMailer)
+        // await this.mailerService.send(toMailer)
         return order
     }
 
 
 
     async getOrderById(userId: string) {
-        //@ts-ignore
-        const orders = await this.orderModel.find({ userId }).cache({key: userId})
+        const orders = await cache(this.orderModel.find({ userId }), userId)
         return orders
     }
 }

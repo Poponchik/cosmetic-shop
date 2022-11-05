@@ -27,11 +27,11 @@ export class Product {
     this.prefix = "/product";
   }
 
-  async createProduct(
-    categoryId: string,
-    data
-  ) {
-    return authorizedAxios.post(`${this.prefix}/createProduct/${categoryId}`, data);
+  async createProduct(categoryId: string, data) {
+    return authorizedAxios.post(
+      `${this.prefix}/createProduct/${categoryId}`,
+      data
+    );
   }
 
   async getAllProducts() {
@@ -93,7 +93,31 @@ export class Category {
     );
   }
 
-  async editCategory(categoryId: string){
-    return authorizedAxios.post(`${this.prefix}/changeCategory/${categoryId}`)
+  async editCategory(categoryId: string) {
+    return authorizedAxios.post(`${this.prefix}/changeCategory/${categoryId}`);
+  }
+}
+
+export class Order {
+  private prefix;
+
+  constructor() {
+    this.prefix = "/order";
+  }
+
+  async createOrder(
+    products,
+    numberPhone: string,
+    address: string,
+    email: string,
+   
+  ) {
+    return unauthorizedAxios.post(`${this.prefix}/createOrder`, {
+      products,
+      numberPhone,
+      address,
+      email,
+    
+    });
   }
 }

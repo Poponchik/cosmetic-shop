@@ -117,11 +117,12 @@ function Main() {
             <div className={styles.products}>
               {products.map((product) => {
                 return (
-                  <Link to="/product" className={styles.link}>
+                  <Link to={"/p/" + product._id} className={styles.link}>
                     <div className={styles.product_cart}>
                       <img
                         src={`${config.serverUrl}/${product.images[0]}`}
                         className={styles.product_photo}
+                       
                       ></img>
                       <p className={styles.title_product}>{product.name}</p>
                       <div className={styles.description_product}>
@@ -148,8 +149,10 @@ function Main() {
                 );
               })}
             </div>
+
             <IoIosArrowForward className={styles.arrow_right} size={24} />
           </div>
+
         </div>
       </div>
 

@@ -35,6 +35,7 @@
 .product_photo {
     object-fit: cover;
     width: 200px;
+    height: 200px;
     border-radius: 4px;
 }
 

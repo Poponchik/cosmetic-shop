@@ -1,56 +1,33 @@
-import * as mongoose from'mongoose';
-import * as redis from'redis';
+import * as redis from "redis";
 
-const client = redis.createClient({url: 'redis://127.0.0.1:6379'});
-client.connect()
+const client = redis.createClient({ url: "redis://127.0.0.1:10001" });
+client.connect();
 
-const exec = mongoose.Query.prototype.exec;
-
-interface Options {
-    key: string
-}
-
-
-// @ts-ignore
-mongoose.Query.prototype.cache = function(options : Options | string = {}) {
-  this.useCache = true;
-  this.hashKey = JSON.stringify((options as Options).key || '');
-
-  return this;
-};
-
-mongoose.Query.prototype.exec = async function() {
-
-  if (!this.useCache) {
-    return exec.apply(this, arguments);
-  }
+export async function cache(query, userId = "") {
+  const hashKey = JSON.stringify(userId);
 
   const key = JSON.stringify(
-    Object.assign({}, this.getQuery(), {
-      collection: this.mongooseCollection.name
+    Object.assign({}, query.getQuery(), {
+      collection: query.mongooseCollection.name,
     })
   );
 
-  // See if we have a value for 'key' in redis
-  const cacheValue = await client.hGet(this.hashKey, key);
-
-  // If we do, return that
+  const cacheValue = await client.hGet(hashKey, key);
   if (cacheValue) {
     const doc = JSON.parse(cacheValue);
     return Array.isArray(doc)
-      ? doc.map(d => new this.model(d))
-      : new this.model(doc);
+      ? doc.map((d) => new query.model(d))
+      : new query.model(doc);
   }
 
-  // Otherwise, issue the query and store the result in redis
-  const result = await exec.apply(this, arguments);
-
-  client.hSet(this.hashKey, key, JSON.stringify(result));
+  const result = await query.exec();
+  client.hSet(hashKey, key, JSON.stringify(result));
   return result;
-};
+}
 
-module.exports = {
-  clearHash(hashKey) {
-    client.del(JSON.stringify(hashKey));
+export function clearHash(hashKey, authorized = true) {
+  if (!authorized) {
+    hashKey = "";
   }
-};
+  client.del(JSON.stringify(hashKey));
+}

@@ -5,22 +5,56 @@ import { IoIosArrowBack } from "react-icons/io";
 import { GoSettings } from "react-icons/go";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
+import  FlashAddedToCart  from "./FlashAddedToCart";
 import { config } from "./config";
 import dataService from "./ds";
-import { Product } from "./types";
+import { Product, Category } from "./types";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { flash } from "react-universal-flash";
 
 function Catalog() {
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [categoryId, setCategoryId] = useState<string>('');
 
-  async function getProducts() {
-    const { data } = await dataService.product.getAllProducts();
+  let {categoryName} = useParams();
+
+  function sendToCart(product) {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const productInCartIndex = cart.findIndex(
+      (element) => element.item._id == product._id
+    );
+    if (productInCartIndex === -1) {
+      cart.push({ item: product, quantity: 1 });
+    } else {
+      cart[productInCartIndex].quantity++;
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    flash(<FlashAddedToCart product={product}/>, 3000, 'success')
+
+  }
+
+  async function getProductsByCategory(categoryId: string) {
+    console.log(categoryId);
+    const { data } = await dataService.product.getCategoryProduct(categoryId);
+    console.log(data);
+
     setProducts(data);
   }
 
+  async function getCategories() {
+    const { data } = await dataService.category.getCategories();
+
+    const catalogCategory = await data.find(
+      (category) => category.name === categoryName
+    );
+
+    getProductsByCategory(catalogCategory._id);
+  }
+
   useEffect(() => {
-    getProducts();
-  }, []);
+    getCategories();
+  }, [categoryName]);
 
   return (
     <React.Fragment>
@@ -34,7 +68,9 @@ function Catalog() {
                 <p className={styles.category_bc}>Face</p>
               </div>
 
-              <div className={styles.category_catalog}>Facial skin care</div>
+              <div className={styles.category_catalog}>
+                {categoryName}
+              </div>
 
               <div className={styles.filter_sort}>
                 <div className={styles.filter_block}>
@@ -129,8 +165,11 @@ function Catalog() {
                   <div className={styles.products}>
                     {products.map((product) => {
                       return (
-                        <Link to="/product" className={styles.link}>
-                          <div className={styles.product_cart}>
+                        <div className={styles.product_cart} key={product._id}>
+                          <Link
+                            to={"/p/" + product._id}
+                            className={styles.link}
+                          >
                             <img
                               src={`${config.serverUrl}/${product.images[0]}`}
                               className={styles.product_photo}
@@ -141,29 +180,33 @@ function Catalog() {
                             <div className={styles.description_product}>
                               <p>{product.description}</p>
                             </div>
-                            <div className={styles.price_block}>
-                              <div className={styles.price_div}>
-                                <p className={styles.price_product}>
-                                  {product.price}
-                                </p>
-                                <p className={styles.gryvna_symbol}>₴</p>
-                              </div>
-                              <button
-                                className={classNames(
-                                  styles.small_button,
-                                  styles.button
-                                )}
-                              >
-                                Add to cart
-                              </button>
+                          </Link>
+                          <div className={styles.price_block}>
+                            <div className={styles.price_div}>
+                              <p className={styles.price_product}>
+                                {product.price}
+                              </p>
+                              <p className={styles.gryvna_symbol}>₴</p>
                             </div>
+                            <button
+                              className={classNames(
+                                styles.small_button,
+                                styles.button
+                              )}
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                sendToCart(product);
+                              }}
+                            >
+                              Add to cart
+                            </button>
                           </div>
-                        </Link>
+                        </div>
                       );
                     })}
                   </div>
 
-                  <button className={styles.show_button}>Show more</button>
+                  {/* <button className={styles.show_button}>Show more</button> */}
                 </div>
               </div>
               <div className={styles.products_viewed_block}>

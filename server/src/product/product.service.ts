@@ -7,6 +7,8 @@ import * as fs from 'fs'
 import { Product, ProductDocument } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
 import { FilesService } from '../files/files.service'
+import { cache, clearHash } from 'src/services/cache'
+import { TagService } from '../tag/tag.service'
 
 
 
@@ -14,26 +16,32 @@ import { FilesService } from '../files/files.service'
 export class ProductService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
-        private fileService: FilesService) { }
+        private fileService: FilesService,
+        private tagService: TagService
+    ) { }
 
     async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
         const fileName = await this.fileService.createFile(images)
         const product = await this.productModel.create({ ...dto, images: fileName, categoryId })
+        await clearHash('', false)
         return product
     }
 
 
     async getAllProducts() {
-        const products = await this.productModel.find()
+        const products = await cache(this.productModel.find())
         return products
     }
     async getOneProductsId(_id: string) {
-        const product = await this.productModel.findById({ _id })
+        const product = await cache(this.productModel.findById({ _id }))
         return product
     }
-
     async getProductsСategory(categoryId: string) {
-        const products = await this.productModel.find({ categoryId })
+        const products = await cache(this.productModel.find({ categoryId }))
+        return products
+    }
+    async getProductsTag(tagId: string) {
+        const products = await this.productModel.find({ tagsId: tagId })
         return products
     }
 
@@ -43,6 +51,7 @@ export class ProductService {
             fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
         })
         await this.productModel.deleteOne({ _id })
+        await clearHash('', false)
         return 'Remove ' + _id
     }
 
@@ -54,6 +63,7 @@ export class ProductService {
         })
         const fileName = await this.fileService.createFile(images)
         const product = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
+        await clearHash('', false)
         return product
     }
 
