@@ -9,7 +9,7 @@ import { RolesGuard } from '../auth/roles.guard'
 import { Role } from '../shared/index'
 
 
-@ApiTags('Категории')
+@ApiTags('Теги')
 @Controller('tag')
 export class TagController {
 
@@ -21,8 +21,8 @@ export class TagController {
     @Roles(Role.ADMIN)
     @UseGuards(RolesGuard)
     @Post('/createTags/')
-    createTags(@Body() TagDto: CreateTagDto) {
-        return this.tagService.createTags(TagDto)
+    createTag(@Body() TagDto: CreateTagDto) {
+        return this.tagService.createTag(TagDto)
     }
 
     @ApiOperation({ summary: 'Получить все теги' })
