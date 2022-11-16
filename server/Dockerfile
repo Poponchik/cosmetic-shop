@@ -8,6 +8,4 @@ RUN npm install
 
 COPY . .
 
-# EXPOSE $PORT
-
 CMD [ "node", "dist/main" ]
