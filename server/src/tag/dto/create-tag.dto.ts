@@ -6,7 +6,7 @@ import { ApiProperty } from '@nestjs/swagger'
 
 export class CreateTagDto {
     @ApiProperty({ example: 'тег' })
-    readonly tag: string
+    readonly name: string
 }
 
 

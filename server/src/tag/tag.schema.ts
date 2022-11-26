@@ -11,7 +11,7 @@ export class Tag {
 
   @ApiProperty({ example: 'тег' })
   @Prop({ required: true })
-  tag: string
+  name: string
 
 }
 

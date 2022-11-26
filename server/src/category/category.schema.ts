@@ -13,6 +13,10 @@ export class Category {
   @Prop({ required: true })
   name: string
 
+  @ApiProperty({ example: 'category', description: 'описание категории' })
+  @Prop()
+  description: string
+
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category)

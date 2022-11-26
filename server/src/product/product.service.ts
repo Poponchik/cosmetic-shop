@@ -47,9 +47,7 @@ export class ProductService {
 
     async deleteProduct(_id: string) {
         const { images } = await this.productModel.findById(_id)
-        images.forEach((image) => {
-            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
-        })
+        await this.fileService.deleteFiles(images)
         await this.productModel.deleteOne({ _id })
         await clearHash('', false)
         return 'Remove ' + _id
@@ -58,9 +56,7 @@ export class ProductService {
 
     async changeProduct(dto: CreateProductDto, _id: string, images: any) {
         const response = await this.productModel.findById(_id)
-        response.images.forEach((image) => {
-            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
-        })
+        await this.fileService.deleteFiles(response.images)
         const fileName = await this.fileService.createFile(images)
         const product = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
         await clearHash('', false)
