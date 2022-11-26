@@ -4,9 +4,30 @@ import { IoIosArrowForward } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
-import classNames from "classnames";
+import { useParams } from "react-router-dom";
+import dataService from "./ds";
+import { Product } from "./types";
+import { config } from "./config";
+
+import { useEffect, useState } from "react";
 
 function ProductCard() {
+  const [product, setProduct] = useState<Product>();
+  const [activeProductPhoto, setActiveProductPhoto] = useState<FileList>();
+
+  let { productId } = useParams();
+
+  async function getProduct(productId: string) {
+    const { data } = await dataService.product.getProduct(productId);
+    setProduct(data);
+    setActiveProductPhoto(data?.images[0])
+  }
+
+  useEffect(() => {
+    if (!productId) return;
+    getProduct(productId);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.inner_container}>
@@ -22,30 +43,27 @@ function ProductCard() {
           </div>
           <div className={styles.product_card}>
             <div className={styles.product_photos}>
+
               <img
                 className={styles.main_photo_product}
-                src="./images/mainphoto.png"
+                src={`${config.serverUrl}/${activeProductPhoto}`}
               ></img>
+
               <div className={styles.product_photos_miniature}>
-                <img
-                  className={styles.photo_product}
-                  src="./images/photo.png"
-                ></img>
-                <img
-                  className={styles.photo_product}
-                  src="./images/photo2.png"
-                ></img>
-                <img
-                  className={styles.photo_product}
-                  src="./images/photo3.png"
-                ></img>
+                {product?.images.map((image, index) =>
+                  index === 0 ? null : (
+                    <img
+                      className={styles.photo_product_mini}
+                      src={`${config.serverUrl}/${image}`}
+                      onClick={() => setActiveProductPhoto(image)}
+                    ></img>
+                  )
+                )}
               </div>
             </div>
+
             <div className={styles.right_div}>
-              <h2 className={styles.title_product_card}>
-                Facial cleanser with enisms for oily skin for deep pore
-                cleansing
-              </h2>
+              <h2 className={styles.title_product_card}>{product?.name}</h2>
               <div className={styles.reviews_block_link}>
                 <div className={styles.reviews_links}>
                   <a className={styles.reviews}>Reviews</a>
@@ -61,8 +79,8 @@ function ProductCard() {
               </div>
               <div className={styles.price_block}>
                 <div className={styles.prices}>
-                  <div className={styles.price}>140 ₴</div>
-                  <div className={styles.full_price}>180 ₴</div>
+                  <div className={styles.price}>{product?.price}</div>
+                  {/* <div className={styles.full_price}>180 ₴</div> */}
                 </div>
                 <div className={styles.in_stock_block}>
                   <BsCheck />
@@ -77,14 +95,7 @@ function ProductCard() {
                   <input type="checkbox" name="acor" id="acor1" />
                   <label htmlFor="acor1">Description</label>
                   <div className={styles.acor_body}>
-                    <p>
-                      Fresh, clean skin in the morning is the result of advanced
-                      cleansing specifically for oily skin with the effect of
-                      soft peeling, anti-acne, smoothing the microrelief and
-                      tone. Washing powder gently but effectively dissolves
-                      makeup residues, pore contents and toxic contaminants of
-                      the metropolis.
-                    </p>
+                    <p>{product?.description}</p>
                   </div>
                   <hr className={styles.line} />
 
@@ -120,91 +131,7 @@ function ProductCard() {
             </div>
           </div>
           <div className={styles.products_viewed_block}>
-            <div className={styles.products_viewed_title}>Products viewed</div>
-            <div className={styles.products_viewed}>
-              <IoIosArrowBack className={styles.arrow_left} size={24} />
-
-              <div className={styles.product_cart}>
-                <img
-                  src="./images/product1.png"
-                  className={styles.product_photo}
-                ></img>
-                <p className={styles.title_product}>Body Scrub</p>
-                <div className={styles.description_product}>
-                  <p>Anti-cellulite coffee scrub with red pepper,</p>
-                  <p>300g</p>
-                </div>
-                <div className={styles.price_block}>
-                  <p className={styles.price_product}> 150 ₴</p>
-                  <button
-                    className={classNames(styles.small_button, styles.button)}
-                  >
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.product_cart}>
-                <img
-                  src="./images/product2.png"
-                  className={styles.product_photo}
-                ></img>
-                <p className={styles.title_product}>Body Scrub</p>
-                <div className={styles.description_product}>
-                  <p>Anti-cellulite coffee scrub with red pepper,</p>
-                  <p>300g</p>
-                </div>
-                <div className={styles.price_block}>
-                  <p className={styles.price_product}> 150 ₴</p>
-                  <button
-                    className={classNames(styles.small_button, styles.button)}
-                  >
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.product_cart}>
-                <img
-                  src="./images/product3.png"
-                  className={styles.product_photo}
-                ></img>
-                <p className={styles.title_product}>Body Scrub</p>
-                <div className={styles.description_product}>
-                  <p>Anti-cellulite coffee scrub with red pepper,</p>
-                  <p>300g</p>
-                </div>
-                <div className={styles.price_block}>
-                  <p className={styles.price_product}> 150 ₴</p>
-                  <button
-                    className={classNames(styles.small_button, styles.button)}
-                  >
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-
-              <div className={styles.product_cart}>
-                <img
-                  src="./images/product4.png"
-                  className={styles.product_photo}
-                ></img>
-                <p className={styles.title_product}>Body Scrub</p>
-                <div className={styles.description_product}>
-                  <p>Anti-cellulite coffee scrub with red pepper,</p>
-                  <p>300g</p>
-                </div>
-                <div className={styles.price_block}>
-                  <p className={styles.price_product}> 150 ₴</p>
-                  <button
-                    className={classNames(styles.small_button, styles.button)}
-                  >
-                    Add to cart
-                  </button>
-                </div>
-              </div>
-              <IoIosArrowForward className={styles.arrow_right} size={24} />
-            </div>
+        
           </div>
           <div className={styles.block_reviews}>
             <div className={styles.reviews}>
@@ -278,14 +205,14 @@ function ProductCard() {
                 </div>
               </div>
               <div className={styles.pagination}>
-                <IoIosArrowBack className={styles.arrow_left_p}/>
+                <IoIosArrowBack className={styles.arrow_left_p} />
                 <div className={styles.pagination_page}>
                   <p className={styles.active_page}>1</p>
                   <p className={styles.page}>2</p>
                   <p className={styles.page}>...</p>
                   <p className={styles.page}>5</p>
                 </div>
-                <IoIosArrowForward className={styles.arrow_right_p}/>
+                <IoIosArrowForward className={styles.arrow_right_p} />
               </div>
             </div>
             <div className={styles.leave_feedback}>

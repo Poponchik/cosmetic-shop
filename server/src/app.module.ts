@@ -1,8 +1,18 @@
-import { Module } from '@nestjs/common'
+import { Module, forwardRef } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
-import { UsersModule } from './users/users.module'
 import { ConfigModule } from '@nestjs/config'
-import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static'
+import * as path from 'path'
+
+import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'
+import { ProductModule } from './product/product.module'
+import { FilesModule } from './files/files.module'
+import { CategoryModule } from './category/category.module'
+import { OrderModule } from './order/order.module'
+import { TagModule } from './tag/tag.module'
+
+
 
 @Module({
     controllers: [],
@@ -10,12 +20,19 @@ import { AuthModule } from './auth/auth.module';
     imports: [
         ConfigModule.forRoot({
             envFilePath: `.env`,
-          }),
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: path.resolve(__dirname, 'static'),
+        }),
         MongooseModule.forRoot(process.env.MONGODB_HOST),
+        forwardRef(() => AuthModule),
         UsersModule,
-        AuthModule,
-
-    ],
+        ProductModule,
+        FilesModule,
+        CategoryModule,
+        OrderModule,
+        TagModule
+    ]
 })
 export class AppModule { }
 

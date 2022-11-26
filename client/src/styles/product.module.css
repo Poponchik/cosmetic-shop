@@ -43,10 +43,16 @@
 
 .product_photos {
     width: 40%;
+    object-fit: cover;
+
 }
 
 .main_photo_product {
     width: 100%;
+    margin-bottom: 12px;
+    /* width: 400px; */
+    height: 400px;
+    border-radius: 8px;
 }
 
 .title_product_card {
@@ -54,10 +60,23 @@
     font-weight: 700;
 }
 
+img {
+    object-fit: cover;
+    height: 100%;
+}
+
 .product_photos_miniature {
     display: flex;
+    width: 140px;
+    height: 110px;
     width: 100%;
     justify-content: space-between;
+    border-radius: 8px;
+
+}
+
+.photo_product_mini{
+    border-radius: 8px;
 }
 
 .photo_product {
