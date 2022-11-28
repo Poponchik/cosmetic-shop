@@ -1,21 +1,18 @@
 version: '3.7'
 
-
-
-
 services:
-  client:
-    build: ./client
-    ports: 
-      - 3000:3000
-      
-  server:
-    build: ./server
-    ports: 
-      - 5000:5000
-      
   redis:
     image: redis/redis-stack:latest
-    ports: 
+    ports:
       - 10001:6379
+  
+  
+  mongodb:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=english
+      - MONGO_INITDB_ROOT_PASSWORD=root
+
 
