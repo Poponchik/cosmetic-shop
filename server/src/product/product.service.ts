@@ -8,7 +8,7 @@ import { Product, ProductDocument } from './product.schema'
 import { CreateProductDto } from './dto/create-product.dto'
 import { FilesService } from '../files/files.service'
 import { cache, clearHash } from 'src/services/cache'
-import { TagService } from '../tag/tag.service'
+// import { TagService } from '../tag/tag.service'
 
 
 
@@ -17,7 +17,7 @@ export class ProductService {
 
     constructor(@InjectModel(Product.name) private productModel: Model<ProductDocument>,
         private fileService: FilesService,
-        private tagService: TagService
+        // private tagService: TagService
     ) { }
 
     async createProducts(dto: CreateProductDto, images: any, categoryId: string) {
@@ -47,9 +47,7 @@ export class ProductService {
 
     async deleteProduct(_id: string) {
         const { images } = await this.productModel.findById(_id)
-        images.forEach((image) => {
-            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
-        })
+        await this.fileService.deleteFiles(images)
         await this.productModel.deleteOne({ _id })
         await clearHash('', false)
         return 'Remove ' + _id
@@ -58,9 +56,7 @@ export class ProductService {
 
     async changeProduct(dto: CreateProductDto, _id: string, images: any) {
         const response = await this.productModel.findById(_id)
-        response.images.forEach((image) => {
-            fs.rm(path.resolve(__dirname, '..', `static/${image}`), (err) => { })
-        })
+        await this.fileService.deleteFiles(response.images)
         const fileName = await this.fileService.createFile(images)
         const product = await this.productModel.findOneAndUpdate({ _id }, { '$set': dto, images: fileName }, { new: true })
         await clearHash('', false)

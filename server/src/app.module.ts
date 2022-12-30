@@ -11,13 +11,21 @@ import { FilesModule } from './files/files.module'
 import { CategoryModule } from './category/category.module'
 import { OrderModule } from './order/order.module'
 import { TagModule } from './tag/tag.module'
+import { ReviewModule } from './review/review.module'
 
-
+import { S3Module } from 'nestjs-s3'
 
 @Module({
     controllers: [],
     providers: [],
     imports: [
+        S3Module.forRoot({
+            config: {
+                region: process.env.AWS_REGION,
+                accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+            },
+          }),
         ConfigModule.forRoot({
             envFilePath: `.env`,
         }),
@@ -31,7 +39,8 @@ import { TagModule } from './tag/tag.module'
         FilesModule,
         CategoryModule,
         OrderModule,
-        TagModule
+        TagModule,
+        ReviewModule
     ]
 })
 export class AppModule { }

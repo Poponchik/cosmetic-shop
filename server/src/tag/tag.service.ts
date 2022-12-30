@@ -12,8 +12,8 @@ export class TagService {
     constructor(@InjectModel(Tag.name) private tagModel: Model<TagDocument>) { }
 
 
-    async createTags(TagDto: CreateTagDto) {
-        const tag = await this.tagModel.create({ tag: TagDto.tag })
+    async createTag(TagDto: CreateTagDto) {
+        const tag = await this.tagModel.create({ name: TagDto.name })
         return tag
     }
 
