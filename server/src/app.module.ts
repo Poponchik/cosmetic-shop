@@ -31,7 +31,10 @@ import { S3Module } from 'nestjs-s3'
         ServeStaticModule.forRoot({
             rootPath: path.resolve(__dirname, 'static'),
         }),
-        MongooseModule.forRoot(process.env.MONGODB_HOST),
+        MongooseModule.forRoot(process.env.MONGODB_HOST, {
+          user: "english",
+          pass: "root"
+        }),
         forwardRef(() => AuthModule),
         UsersModule,
         ProductModule,
