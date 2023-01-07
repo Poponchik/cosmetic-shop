@@ -4,15 +4,32 @@ services:
   redis:
     image: redis/redis-stack:latest
     ports:
-      - 10001:6379
-  
-  
-  mongodb:
-    image: mongo:5.0
+      - 10001:6379 
+  mongo:
+    image: mongo
     ports:
-      - 27017:27017
+      - 27018:27017
     environment:
+      - MONGO_INITDB_DATABASE=english
       - MONGO_INITDB_ROOT_USERNAME=english
       - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes: 
+      - my_data:/data/db 
+    command: [--auth]
+
+  node-app:
+    build: 
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:5000"
+    restart: always
+    depends_on:
+      - mongo
+    env_file:
+      - ./server/.env
+
+volumes: 
+  my_data: 
 
 
