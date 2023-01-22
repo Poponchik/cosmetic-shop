@@ -11,3 +11,9 @@ export type Category = {
   _id: string;
   name: string;
 }
+
+
+export type Tag = {
+  _id: string,
+  tag: string;
+}

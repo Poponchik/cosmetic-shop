@@ -196,64 +196,64 @@ img {
     align-items: center;
 }
 
-.arrow_left {
-    position: absolute;
-    left: -5%;
-    color: #DBDBDB;
-    cursor: pointer;
 
-}
 
-.arrow_right {
-    position: absolute;
-    right: -5%;
-    color: #9D9D9D;
-    cursor: pointer;
 
-}
 
 .products_block {
     margin-top: 100px;
 
 }
 
-    ::-webkit-scrollbar {
-        height: 3px;
-        width: 0px;
-        background: #e6e6e6;
-    }
+::-webkit-scrollbar {
+    height: 3px;
+    width: 0px;
+    background: #e6e6e6;
+}
 
-    ::-webkit-scrollbar-thumb:horizontal {
-        background: #FB9B5A;
-        border-radius: 10px;
-    }
+::-webkit-scrollbar-thumb:horizontal {
+    background: #FB9B5A;
+    border-radius: 10px;
+}
+
+
 
 .products {
-    overflow: scroll;
+    /* overflow: scroll;
     scrollbar-width: thin;
-    scrollbar-color: hsl(0 0% 50%);
+    /* scrollbar-color: hsl(0 0% 50%); */
     padding-bottom: 30px;
     margin-top: 40px;
     display: flex;
-    gap: 16px;
     justify-content: space-between;
-    max-width: 1040px;
+    padding-left: 2px;
+    position: relative;
+
 
 }
 
 .product_cart {
     display: inline-block;
     padding: 16px 24px;
+    margin-right: 8px!important;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     border-radius: 4px;
     transition: all 0.3s ease-in;
+    margin: 12px 0px 16px 0px;
 }
 
+.product_cart:first-child {
+    margin-left: 2px;
+}
+
+.product_cart:last-child {
+    /* margin-right: 1px; */
+}
 
 
 .product_photo {
     object-fit: cover;
-    width: 200px;
+    max-width: 200px;
     height: 200px;
 }
 
@@ -281,12 +281,13 @@ img {
     height: 36px;
 }
 
-.price_div{
+.price_div {
     display: flex;
     gap: 4px;
 }
 
-.price_product, .gryvna_symbol {
+.price_product,
+.gryvna_symbol {
     color: #FB9B5A;
     font-weight: 700;
     font-size: 14px;
@@ -309,10 +310,11 @@ img {
 
 }
 
-.product_cart:hover {
+/* .product_cart:hover {
     box-shadow: 0px 3px 16px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
-}
+    position: relative;
+} */
 
 .discount_block {
     margin-top: 100px;
@@ -788,9 +790,9 @@ img {
     }
 
     .products {
-        overflow: scroll;
+        /* overflow: scroll;
         scrollbar-width: thin;
-        scrollbar-color: hsl(0 0% 50%);
+        scrollbar-color: hsl(0 0% 50%); */
         padding-bottom: 30px;
 
     }
@@ -1021,6 +1023,9 @@ img {
 
     }
 
+
+
+
     .left_div {
 
         width: 100%;
@@ -1145,17 +1150,17 @@ img {
         width: 336px;
     }
 
-    .products{
+    .products {
         display: block;
         overflow: hidden;
     }
 
-    .product_cart{
+    .product_cart {
         width: 100%;
         margin-top: 16px;
     }
 
-    .main_photo{
+    .main_photo {
         width: 100%;
     }
 
@@ -1163,12 +1168,12 @@ img {
         margin: 0 auto;
         min-width: 336px;
         margin-bottom: 12px;
-      
+
     }
 
     .articles {
         display: block;
-        
+
     }
 
     .input_subscribe {
@@ -1191,7 +1196,3 @@ img {
     }
 
 }
-
-
-
-

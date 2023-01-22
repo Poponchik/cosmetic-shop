@@ -14,7 +14,8 @@ export class CategoryService {
 
 
     async createCategory(CategoryDto: CreateCategoryDto) {
-        const category = await cache(this.categoryModel.create({ name: CategoryDto.name }))
+        const category = await this.categoryModel.create({ name: CategoryDto.name })
+        await clearHash('', false)
         return category
     }
 

@@ -15,7 +15,7 @@ import { flash } from "react-universal-flash";
 
 function Catalog() {
   const [products, setProducts] = useState<Array<Product>>([]);
-  const [categoryId, setCategoryId] = useState<string>('');
+  // const [categoryId, setCategoryId] = useState<string>('');
 
   let {categoryName} = useParams();
 

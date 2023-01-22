@@ -72,6 +72,30 @@ export class Product {
   }
 }
 
+export class Tag {
+  private prefix;
+
+  constructor() {
+    this.prefix = "/tag";
+  }
+
+  async createTag(tag: string) {
+    return authorizedAxios.post(`${this.prefix}/createTags`, { tag });
+  }
+
+  async getAllTags() {
+    return authorizedAxios.get(`${this.prefix}/tagAll`);
+  }
+
+  async deleteTag(id: string) {
+    return authorizedAxios.delete(`${this.prefix}/deleteTag/${id}`);
+  }
+
+  async changeTag(id: string, tag: string) {
+    return authorizedAxios.post(`${this.prefix}/changeTag/${id}`, { tag });
+  }
+}
+
 export class Category {
   private prefix;
 
@@ -93,8 +117,8 @@ export class Category {
     );
   }
 
-  async editCategory(categoryId: string) {
-    return authorizedAxios.post(`${this.prefix}/changeCategory/${categoryId}`);
+  async editCategory(categoryId: string, name: string) {
+    return authorizedAxios.post(`${this.prefix}/changeCategory/${categoryId}`, {name});
   }
 }
 
@@ -109,15 +133,13 @@ export class Order {
     products,
     numberPhone: string,
     address: string,
-    email: string,
-   
+    email: string
   ) {
     return unauthorizedAxios.post(`${this.prefix}/createOrder`, {
       products,
       numberPhone,
       address,
       email,
-    
     });
   }
 }

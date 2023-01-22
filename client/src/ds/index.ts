@@ -1,4 +1,4 @@
-import { Auth, Product, Category, Order } from "./ds";
+import { Auth, Product, Category, Order, Tag } from "./ds";
 
 class DataService {
   get auth() {
@@ -11,6 +11,10 @@ class DataService {
 
   get category() {
     return new Category();
+  }
+
+  get tag() {
+    return new Tag();
   }
 
   get order() {

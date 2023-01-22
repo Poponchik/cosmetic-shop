@@ -11,8 +11,10 @@ import Registration from "./Registration";
 import * as React from "react";
 import "@fontsource/montserrat-alternates";
 import Layout from "./layout";
+import Carosel from "./carusel";
 import {Flasher} from "react-universal-flash";
 import Message from "./Message"
+import './styles/App.css'
 
 
 
@@ -24,6 +26,7 @@ function App() {
        </Flasher>
       <Routes>
         <Route path="/p/:productId" element={<Layout><ProductCard/></Layout>} />
+        <Route path="/carusel" element={<Carosel/>} />
         <Route path="/admin" element={<Layout><Admin/></Layout>} />
         <Route path="/newProduct" element={<Layout><AddProduct/></Layout>} />
         <Route path="/editProduct" element={<Layout><EditProduct/></Layout>} />

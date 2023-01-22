@@ -13,9 +13,12 @@ import { config } from "./config";
 import dataService from "./ds";
 import { Product } from "./types";
 import { useState, useEffect } from "react";
+import Carousel from "react-elastic-carousel";
 
 function Main() {
   const [products, setProducts] = useState<Array<Product>>([]);
+  const [index, setIndex] = useState(0);
+  const length = 3;
 
   async function getProducts() {
     const { data } = await dataService.product.getAllProducts();
@@ -23,12 +26,34 @@ function Main() {
 
     console.log(data);
   }
+   
+  // let breakPoints = [
+  //   { width: 1, itemsToShow: 1 },
+  //   { width: 550, itemsToShow: 2, itemsToScroll: 1, pagination: false },
+  //   { width: 850, itemsToShow: 2 },
+  //   { width: 1150, itemsToShow: 2, itemsToScroll: 1 },
+  //   { width: 1450, itemsToShow: 4 },
+  //   { width: 1750, itemsToShow: 4 },
+  // ]
 
+
+  let stylesSlider = {
+    itemsToShow: 4,
+    itemsToScroll: 4,
+    isRTL: false,
+    pagination: true,
+    className: "ga",
+    // breakPoints: breakPoints,
+  };
+
+ 
   useEffect(() => {
     getProducts();
   }, []);
 
   return (
+    //@ts-ignore
+
     <React.Fragment>
       {/* <body> */}
 
@@ -111,10 +136,10 @@ function Main() {
         <div className={styles.products_block}>
           <h2 className={styles.title_h2}>Our bestsellers</h2>
 
-          <div className={styles.products_block_arrow}>
-            <IoIosArrowBack className={styles.arrow_left} size={24} />
+          {/* <div className={styles.products_block_arrow}> */}
 
-            <div className={styles.products}>
+          <div className={styles.products}>
+            <Carousel {...stylesSlider}>
               {products.map((product) => {
                 return (
                   <Link to={"/p/" + product._id} className={styles.link}>
@@ -122,7 +147,6 @@ function Main() {
                       <img
                         src={`${config.serverUrl}/${product.images[0]}`}
                         className={styles.product_photo}
-                       
                       ></img>
                       <p className={styles.title_product}>{product.name}</p>
                       <div className={styles.description_product}>
@@ -148,11 +172,9 @@ function Main() {
                   </Link>
                 );
               })}
-            </div>
-
-            <IoIosArrowForward className={styles.arrow_right} size={24} />
+            </Carousel>
+            {/* </div> */}
           </div>
-
         </div>
       </div>
 
